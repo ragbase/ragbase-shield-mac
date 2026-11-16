@@ -50,3 +50,10 @@ IBAN, numéros et autres données privées par des codes : `DOSSIER_1`, `DOC_3`,
 
 9. **Si un outil Shield répond par un problème**, ne cherchez pas à le contourner : répétez le message à
    l'avocat avec des mots simples.
+
+10. **Si les outils Shield manquent** (aucun outil dont le nom commence par `shield_`), Shield n'est pas actif
+    dans cette conversation. Dites-le simplement à l'avocat : « RAGbase Shield n'est pas actif sur cet
+    ordinateur. Fermez puis rouvrez l'application Claude. Si cela continue, retirez le plugin et ajoutez-le de
+    nouveau depuis shield.ragbase.ai, avec le bouton de cet ordinateur (Windows ou Mac). » Tant que Shield
+    n'est pas actif, ne lisez aucun document de client et ne demandez pas à l'avocat de joindre ou de coller
+    des documents : ils partiraient sans protection.
