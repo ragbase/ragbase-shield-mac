@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ragbase-shield": {
+      "command": "/bin/sh",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/engine/shield", "-I", "-B", "-X", "utf8", "-m", "ragbase_shield.claude_tab"]
+    }
+  }
+}

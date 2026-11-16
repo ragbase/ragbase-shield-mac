@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Shield Desk · RAGbase Shield</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-row">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false">
+          <path class="brand-shield" d="M12 2 4 5v6.2c0 5 3.4 9.3 8 10.8 4.6-1.5 8-5.8 8-10.8V5l-8-3Z"/>
+          <path class="brand-check" d="m8.4 12.1 2.5 2.5 4.8-5"/>
+        </svg>
+        <h1 class="brand-name">RAGbase Shield <span class="brand-sub">Desk</span></h1>
+      </div>
+      <div class="topbar-tools">
+        <p id="conn" class="conn" data-state="checking" role="status">
+          <span class="dot" aria-hidden="true"></span><span id="conn-text">Connexion…</span>
+        </p>
+        <div class="lang-switch" role="group" aria-label="Langue" data-i18n-aria-label="lang_group">
+          <button type="button" class="lang-btn" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+          <button type="button" class="lang-btn" data-lang="en" lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="tabs" role="tablist" aria-label="Sections de Shield Desk" data-i18n-aria-label="tabs_label">
+        <button type="button" class="tab" role="tab" id="tab-dossiers" data-tab="dossiers" aria-controls="panel-dossiers" aria-selected="true" data-i18n="tab_dossiers">Dossiers</button>
+        <button type="button" class="tab" role="tab" id="tab-masquer" data-tab="masquer" aria-controls="panel-masquer" aria-selected="false" tabindex="-1" data-i18n="tab_masquer">Masquer</button>
+        <button type="button" class="tab" role="tab" id="tab-restaurer" data-tab="restaurer" aria-controls="panel-restaurer" aria-selected="false" tabindex="-1" data-i18n="tab_restaurer">Restaurer</button>
+        <button type="button" class="tab" role="tab" id="tab-fichiers" data-tab="fichiers" aria-controls="panel-fichiers" aria-selected="false" tabindex="-1" data-i18n="tab_fichiers">Fichiers</button>
+        <button type="button" class="tab" role="tab" id="tab-journal" data-tab="journal" aria-controls="panel-journal" aria-selected="false" tabindex="-1" data-i18n="tab_journal">Journal</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div id="alert" class="alert" role="alert" hidden>
+      <p id="alert-text"></p>
+      <div class="alert-actions">
+        <button type="button" id="alert-retry" class="btn btn-small" data-i18n="retry" hidden>Réessayer</button>
+        <button type="button" id="alert-close" class="btn btn-small btn-ghost" data-i18n="close">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <noscript>
+    <div class="wrap"><p class="note note-warn">Shield Desk a besoin de JavaScript. Tout reste sur cet ordinateur. / Shield Desk needs JavaScript. Everything stays on this computer.</p></div>
+  </noscript>
+
+  <main id="main" class="wrap" tabindex="-1">
+
+    <!-- Dossiers ======================================================== -->
+    <section id="panel-dossiers" class="panel" role="tabpanel" aria-labelledby="tab-dossiers">
+      <div class="card">
+        <h2 data-i18n="dos_add_title">Ajouter un dossier</h2>
+        <p class="intro" data-i18n="dos_add_intro">Indiquez le dossier client qui se trouve sur cet ordinateur.</p>
+        <p class="note note-warn" data-i18n="dos_warn_attach">Connectez un dossier, ne joignez pas le fichier à la conversation.</p>
+        <form id="add-dossier-form" class="form-grid" method="post" autocomplete="off" novalidate>
+          <div class="field">
+            <label for="add-folder" data-i18n="dos_folder_label">Chemin du dossier</label>
+            <input type="text" id="add-folder" name="folder" required aria-describedby="add-folder-hint"
+                   autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                   data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" data-lt-active="false">
+            <p id="add-folder-hint" class="field-hint" data-i18n="dos_folder_hint">Chemin complet du dossier.</p>
+          </div>
+          <div class="field">
+            <label for="add-title" data-i18n="dos_title_label">Titre (facultatif)</label>
+            <input type="text" id="add-title" name="title" aria-describedby="add-title-hint"
+                   autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                   data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" data-lt-active="false">
+            <p id="add-title-hint" class="field-hint" data-i18n="dos_title_hint">Visible seulement sur cette page.</p>
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="add-btn" class="btn btn-primary" data-i18n="dos_add_btn">Ajouter et analyser</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="section-head">
+        <h2 id="dos-list-title" tabindex="-1" data-i18n="dos_list_title">Vos dossiers</h2>
+        <button type="button" id="dos-refresh" class="btn btn-small" data-i18n="refresh">Actualiser</button>
+      </div>
+      <div id="dossier-list" class="dossier-list"></div>
+
+      <div id="ext-card" class="card ext-card">
+        <h2 data-i18n="ext_title">Extension navigateur</h2>
+        <p class="intro" data-i18n="ext_intro">Dans les options de l'extension RAGbase Shield, indiquez l'adresse et le jeton ci-dessous.</p>
+        <dl class="ext-grid">
+          <div>
+            <dt data-i18n="ext_address">Adresse de Shield Desk</dt>
+            <dd><code id="ext-address"></code></dd>
+          </div>
+          <div>
+            <dt data-i18n="ext_token">Jeton</dt>
+            <dd><code id="ext-token" class="token"></code></dd>
+          </div>
+        </dl>
+        <div class="actions">
+          <button type="button" id="ext-copy" class="btn btn-primary" data-i18n="ext_copy">Copier le jeton</button>
+          <button type="button" id="ext-show" class="btn" aria-pressed="false" aria-controls="ext-token">Afficher</button>
+        </div>
+        <p class="field-hint" data-i18n="ext_secret">Ce jeton protège Shield Desk. Ne le partagez pas et ne le collez jamais dans un chat.</p>
+      </div>
+    </section>
+
+    <!-- Masquer ========================================================= -->
+    <section id="panel-masquer" class="panel" role="tabpanel" aria-labelledby="tab-masquer" hidden>
+      <div class="card">
+        <h2 data-i18n="mask_title">Masquer un texte</h2>
+        <div class="field">
+          <label for="mask-dossier" data-i18n="dossier_label">Dossier</label>
+          <select id="mask-dossier" class="dossier-select" aria-describedby="mask-dossier-hint"></select>
+          <p id="mask-dossier-hint" class="field-hint"></p>
+        </div>
+        <div class="field">
+          <label for="mask-input" data-i18n="mask_input_label">Texte d'origine</label>
+          <textarea id="mask-input" rows="10" aria-describedby="mask-input-hint"
+                    autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                    data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" data-lt-active="false"></textarea>
+          <p id="mask-input-hint" class="field-hint" data-i18n="mask_input_hint">Ce texte reste sur cet ordinateur.</p>
+        </div>
+        <div class="actions">
+          <button type="button" id="mask-btn" class="btn btn-primary" data-i18n="mask_btn">Masquer</button>
+          <button type="button" id="mask-clear" class="btn" data-i18n="clear_btn">Effacer</button>
+        </div>
+      </div>
+
+      <div id="mask-result" class="card" hidden>
+        <h2 id="mask-result-title" tabindex="-1" data-i18n="mask_result_title">Texte masqué</h2>
+        <p id="mask-stale" class="note note-warn" data-i18n="mask_stale" hidden>Le texte d'origine a changé.</p>
+        <div class="mask-grid">
+          <div class="mask-out">
+            <div id="mask-output" class="output" role="region" tabindex="0" aria-labelledby="mask-result-title"></div>
+          </div>
+          <div class="mask-review">
+            <h3 id="review-title" data-i18n="review_title">Vérifiez avant de copier</h3>
+            <div id="mask-review"></div>
+          </div>
+          <div class="mask-copy">
+            <p class="note" data-i18n="mask_reminder">Collez ce texte dans Claude, ChatGPT ou Copilot. Ne collez jamais le texte d'origine.</p>
+            <button type="button" id="mask-copy" class="btn btn-primary btn-big" data-i18n="mask_copy_btn">Copier le texte masqué</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Restaurer ======================================================= -->
+    <section id="panel-restaurer" class="panel" role="tabpanel" aria-labelledby="tab-restaurer" hidden>
+      <div class="card">
+        <h2 data-i18n="restore_title">Restaurer les noms</h2>
+        <p class="intro" data-i18n="restore_intro">Collez la réponse de l'assistant IA.</p>
+        <div class="field">
+          <label for="restore-dossier" data-i18n="dossier_label">Dossier</label>
+          <select id="restore-dossier" class="dossier-select" aria-describedby="restore-dossier-hint"></select>
+          <p id="restore-dossier-hint" class="field-hint"></p>
+        </div>
+        <div class="field">
+          <label for="restore-input" data-i18n="restore_input_label">Réponse de l'IA (avec les codes)</label>
+          <textarea id="restore-input" rows="10" aria-describedby="restore-input-hint"
+                    autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+                    data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false" data-lt-active="false"></textarea>
+          <p id="restore-input-hint" class="field-hint" data-i18n="restore_input_hint">Raccourci : Ctrl+Entrée.</p>
+        </div>
+        <div class="actions">
+          <button type="button" id="restore-btn" class="btn btn-primary" data-i18n="restore_btn">Restaurer les noms</button>
+          <button type="button" id="restore-clear" class="btn" data-i18n="clear_btn">Effacer</button>
+        </div>
+      </div>
+
+      <div id="restore-result" class="card" hidden>
+        <h2 id="restore-result-title" tabindex="-1" data-i18n="restore_result_title">Texte restauré</h2>
+        <p id="restore-summary" class="review-summary"></p>
+        <div id="restore-unknown" class="note note-warn" hidden>
+          <h3 class="note-title" data-i18n="restore_unknown_title">Codes inconnus dans ce dossier</h3>
+          <p data-i18n="restore_unknown_text">L'assistant IA a peut-être inventé ou modifié ces codes.</p>
+          <ul id="restore-unknown-list" class="code-list"></ul>
+        </div>
+        <div id="restore-output" class="output" role="region" tabindex="0" aria-labelledby="restore-result-title"></div>
+        <p class="note" data-i18n="restore_note">Ce texte contient les vrais noms. Gardez-le sur cet ordinateur.</p>
+        <button type="button" id="restore-copy" class="btn btn-primary btn-big" data-i18n="restore_copy_btn">Copier le texte restauré</button>
+      </div>
+    </section>
+
+    <!-- Fichiers ======================================================== -->
+    <section id="panel-fichiers" class="panel" role="tabpanel" aria-labelledby="tab-fichiers" hidden>
+      <div class="card">
+        <h2 data-i18n="files_title">Masquer des fichiers</h2>
+        <p class="intro" data-i18n="files_intro">Shield Desk lit les fichiers sur cet ordinateur.</p>
+        <div class="field">
+          <label for="files-dossier" data-i18n="dossier_label">Dossier</label>
+          <select id="files-dossier" class="dossier-select" aria-describedby="files-dossier-hint"></select>
+          <p id="files-dossier-hint" class="field-hint"></p>
+        </div>
+        <div id="dropzone" class="dropzone">
+          <p class="dropzone-title" data-i18n="files_drop">Déposez vos fichiers ici</p>
+          <p class="dropzone-or" data-i18n="files_or">ou</p>
+          <button type="button" id="files-pick" class="btn btn-primary" data-i18n="files_pick">Choisir des fichiers</button>
+          <input type="file" id="file-input" class="file-input" multiple tabindex="-1" aria-hidden="true"
+                 accept=".pdf,.docx,.txt,.md,.markdown,.eml,.html,.htm">
+          <p class="field-hint" data-i18n="files_types">Formats : PDF, DOCX, TXT, MD, EML, HTML.</p>
+        </div>
+        <p id="files-status" class="busy-line" role="status" aria-live="polite"></p>
+      </div>
+
+      <div id="files-results" class="card" hidden>
+        <div class="section-head section-head-tight">
+          <h2 id="files-results-title" data-i18n="files_results_title">Fichiers masqués</h2>
+          <button type="button" id="files-clear" class="btn btn-small" data-i18n="files_clear">Tout effacer</button>
+        </div>
+        <p class="note" data-i18n="files_reminder">Utilisez seulement la copie masquée dans le chat, jamais le fichier d'origine.</p>
+        <ul id="files-list" class="file-list" aria-labelledby="files-results-title"></ul>
+      </div>
+    </section>
+
+    <!-- Journal ========================================================= -->
+    <section id="panel-journal" class="panel" role="tabpanel" aria-labelledby="tab-journal" hidden>
+      <div class="card">
+        <h2 id="journal-title" data-i18n="journal_title">Journal</h2>
+        <p class="intro" data-i18n="journal_intro">Le journal garde des codes et des nombres seulement.</p>
+        <div class="toolbar">
+          <div class="field field-inline">
+            <label for="journal-dossier" data-i18n="journal_filter">Dossier</label>
+            <select id="journal-dossier"></select>
+          </div>
+          <button type="button" id="journal-refresh" class="btn" data-i18n="refresh">Actualiser</button>
+        </div>
+        <div id="journal-wrap" class="table-wrap" role="region" tabindex="0" aria-labelledby="journal-title" hidden>
+          <table class="data">
+            <thead>
+              <tr>
+                <th scope="col" data-i18n="journal_col_time">Date</th>
+                <th scope="col" data-i18n="journal_col_event">Événement</th>
+                <th scope="col" data-i18n="journal_col_dossier">Dossier</th>
+                <th scope="col" data-i18n="journal_col_counts">Détails</th>
+              </tr>
+            </thead>
+            <tbody id="journal-body"></tbody>
+          </table>
+        </div>
+        <p id="journal-empty" class="empty" data-i18n="journal_empty" hidden>Aucune opération enregistrée.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <p class="footer-privacy">
+        <strong data-i18n="footer_privacy">Pseudonymisation locale et réversible. Rien n'est envoyé à RAGbase.</strong>
+        <span data-i18n="footer_limits">Relisez toujours le texte masqué avant de le copier.</span>
+      </p>
+      <p class="footer-more">
+        <a href="https://ragbase.ai" target="_blank" rel="noopener noreferrer"><span data-i18n="footer_more">Pour aller plus loin : RAGbase</span><span class="visually-hidden" data-i18n="new_tab"> (s'ouvre dans un nouvel onglet)</span></a>
+      </p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

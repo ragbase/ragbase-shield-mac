@@ -1,0 +1,99 @@
+# RAGbase Shield synthetic street names (French). Written for RAGbase Shield, Apache-2.0: generic street
+# names, one per line, with the street type ("rue des Lilas"). Used only in synthetic replacement mode.
+rue des Lilas
+rue des Acacias
+rue des Peupliers
+rue des Tilleuls
+rue des Érables
+rue des Ormes
+rue des Bouleaux
+rue des Glycines
+rue des Jardins
+rue des Vignes
+rue des Prés
+rue des Moulins
+rue des Écoles
+rue des Fontaines
+rue des Remparts
+rue des Tanneurs
+rue des Cordeliers
+rue des Carmes
+rue des Capucins
+rue de la Gare
+rue de la Mairie
+rue de la Poste
+rue de la Fontaine
+rue de la Forge
+rue de la Paix
+rue de la Liberté
+rue de la République
+rue de la Chapelle
+rue de la Prairie
+rue de la Verrerie
+rue du Moulin
+rue du Château
+rue du Pont
+rue du Port
+rue du Stade
+rue du Lavoir
+rue du Vieux Puits
+rue du Commerce
+rue du Marché
+rue Pasteur
+rue Victor Hugo
+rue Jean Moulin
+rue des Frères Lumière
+rue Émile Zola
+rue Jules Ferry
+rue Anatole France
+rue Gambetta
+rue Carnot
+rue Voltaire
+rue Lamartine
+avenue de la Gare
+avenue des Platanes
+avenue du Général de Gaulle
+avenue de Verdun
+avenue de la Libération
+avenue Jean Jaurès
+avenue Foch
+avenue de Bretagne
+avenue des Champs
+avenue du Parc
+boulevard de la Mer
+boulevard des Alliés
+boulevard Saint-Michel
+boulevard Gambetta
+boulevard de Strasbourg
+boulevard Carnot
+boulevard des Belges
+boulevard du Nord
+chemin des Vignes
+chemin de la Croix
+chemin des Dames
+chemin du Bois
+chemin de Halage
+chemin des Sources
+impasse des Rosiers
+impasse du Clos
+impasse des Mimosas
+impasse de la Source
+place de la Mairie
+place du Marché
+place de l'Église
+place de la Fontaine
+allée des Cerisiers
+allée des Chênes
+allée des Marronniers
+allée des Hêtres
+allée du Verger
+route de Lyon
+route de Nantes
+route de Bordeaux
+route de la Plage
+route des Crêtes
+square des Oliviers
+cours Gambetta
+cours de la République
+quai des Brumes
+quai de la Marne

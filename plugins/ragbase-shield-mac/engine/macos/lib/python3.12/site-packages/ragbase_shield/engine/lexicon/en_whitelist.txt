@@ -1,0 +1,1100 @@
+# RAGbase Shield whitelist and legal terms (English). Written for RAGbase Shield, Apache-2.0.
+# Matching is case and accent insensitive, token by token. Sections (read by ragbase_shield.engine.locale,
+# bundle("en")):
+#   [whitelist]   phrases that the rules and the optional NER must never mask: courts, public bodies,
+#                 regulators, statutes, standards, public institutions. A rule or NER span that overlaps one
+#                 of these phrases is dropped. Do not add words that can be part of a person or company
+#                 name (use [legal_terms]).
+#   [vendors]     public tools and vendors never masked (same protection as [whitelist]); v0.4 (P1): the one
+#                 that is the dossier's own main e-mail domain label may be masked when the own-company
+#                 option is on (ragbase_shield.engine.locale.own_company_vendor_setting).
+#   [legal_terms] roles, document types, legal and HR nouns: never a person's name word; a company name made
+#                 only of these words is ignored; they may appear inside a longer company name.
+#   [roles]       words that introduce a person ("manager Jane Doe", "colleague Priya", "attorney Mark
+#                 Ellis"): the role stays in clear, the name after it is a person.
+
+# [whitelist]
+# --- US courts ---
+supreme court
+supreme court of the united states
+united states supreme court
+court of appeals
+court of appeal
+united states court of appeals
+circuit court
+district court
+united states district court
+bankruptcy court
+united states bankruptcy court
+tax court
+united states tax court
+court of federal claims
+court of international trade
+superior court
+county court
+family court
+probate court
+juvenile court
+municipal court
+small claims court
+appellate division
+appellate court
+court of chancery
+chancery court
+magistrate court
+traffic court
+federal circuit
+first circuit
+second circuit
+third circuit
+fourth circuit
+fifth circuit
+sixth circuit
+seventh circuit
+eighth circuit
+ninth circuit
+tenth circuit
+eleventh circuit
+southern district
+northern district
+eastern district
+western district
+central district
+middle district
+district of columbia
+# --- UK, Irish, Canadian, Australian courts and tribunals ---
+high court
+high court of justice
+court of session
+crown court
+magistrates court
+magistrates' court
+county court
+sheriff court
+employment tribunal
+employment appeal tribunal
+first-tier tribunal
+upper tribunal
+privy council
+judicial committee of the privy council
+supreme court of the united kingdom
+court of appeal of england and wales
+chancery division
+queen's bench division
+king's bench division
+family division
+administrative court
+commercial court
+technology and construction court
+supreme court of canada
+federal court of canada
+federal court of australia
+high court of australia
+# --- international courts and bodies ---
+european court of justice
+court of justice of the european union
+european court of human rights
+general court
+international court of justice
+international criminal court
+permanent court of arbitration
+european commission
+european parliament
+european council
+council of europe
+european union
+united nations
+united nations security council
+general assembly
+world health organization
+world trade organization
+international monetary fund
+world bank
+organisation for economic co-operation and development
+north atlantic treaty organization
+european data protection board
+european data protection supervisor
+# --- US federal agencies and regulators ---
+federal government
+united states government
+department of justice
+department of labor
+department of state
+department of defense
+department of the treasury
+department of commerce
+department of education
+department of energy
+department of transportation
+department of agriculture
+department of homeland security
+department of health and human services
+department of housing and urban development
+department of veterans affairs
+department of the interior
+internal revenue service
+securities and exchange commission
+federal trade commission
+federal communications commission
+federal reserve
+federal reserve board
+federal reserve bank
+federal bureau of investigation
+federal aviation administration
+federal deposit insurance corporation
+federal election commission
+federal energy regulatory commission
+food and drug administration
+environmental protection agency
+equal employment opportunity commission
+national labor relations board
+occupational safety and health administration
+consumer financial protection bureau
+social security administration
+centers for disease control and prevention
+centers for medicare and medicaid services
+national institutes of health
+small business administration
+bureau of labor statistics
+census bureau
+office of foreign assets control
+office of personnel management
+office of management and budget
+government accountability office
+patent and trademark office
+copyright office
+citizenship and immigration services
+immigration and customs enforcement
+customs and border protection
+transportation security administration
+department of motor vehicles
+attorney general
+office of the attorney general
+district attorney
+public defender
+state department
+state bar
+american bar association
+better business bureau
+chamber of commerce
+# --- UK, Irish, Canadian, Australian public bodies ---
+hm revenue and customs
+hm revenue & customs
+hm treasury
+hm courts and tribunals service
+home office
+foreign office
+cabinet office
+crown prosecution service
+companies house
+information commissioner's office
+financial conduct authority
+prudential regulation authority
+competition and markets authority
+advertising standards authority
+health and safety executive
+national health service
+department for work and pensions
+department for education
+department for business and trade
+driver and vehicle licensing agency
+office for national statistics
+bank of england
+law society
+bar council
+solicitors regulation authority
+legal aid agency
+acas
+advisory, conciliation and arbitration service
+equality and human rights commission
+pensions regulator
+charity commission
+serious fraud office
+national crime agency
+metropolitan police
+data protection commission
+central bank of ireland
+revenue commissioners
+canada revenue agency
+privacy commissioner
+office of the privacy commissioner
+australian taxation office
+fair work commission
+australian securities and investments commission
+# --- statutes, regulations, standards ---
+general data protection regulation
+data protection act
+freedom of information act
+privacy act
+california consumer privacy act
+california privacy rights act
+health insurance portability and accountability act
+sarbanes-oxley act
+dodd-frank act
+fair labor standards act
+fair credit reporting act
+family and medical leave act
+americans with disabilities act
+age discrimination in employment act
+civil rights act
+equal pay act
+national labor relations act
+occupational safety and health act
+employee retirement income security act
+affordable care act
+immigration and nationality act
+foreign corrupt practices act
+bank secrecy act
+patriot act
+computer fraud and abuse act
+digital millennium copyright act
+telephone consumer protection act
+truth in lending act
+uniform commercial code
+federal rules of civil procedure
+federal rules of evidence
+federal rules of criminal procedure
+internal revenue code
+bankruptcy code
+companies act
+employment rights act
+equality act
+consumer rights act
+human rights act
+bribery act
+modern slavery act
+limitation act
+insolvency act
+sale of goods act
+unfair contract terms act
+working time regulations
+transfer of undertakings
+employment standards act
+fair work act
+constitution
+first amendment
+fourth amendment
+fifth amendment
+fourteenth amendment
+bill of rights
+magna carta
+# --- defined terms and generic headings often capitalised ---
+terms and conditions
+terms of service
+privacy policy
+code of conduct
+non-disclosure agreement
+master services agreement
+statement of work
+service level agreement
+purchase order
+letter of intent
+memorandum of understanding
+power of attorney
+board of directors
+annual general meeting
+human resources
+customer success
+customer support
+customer service
+information technology
+research and development
+quality assurance
+business development
+account management
+project management
+product management
+supply chain
+# [vendors]
+# --- universal entities never masked (public tools and vendors) ---
+google docs
+google sheets
+google drive
+google meet
+microsoft teams
+microsoft office
+microsoft excel
+microsoft word
+zoom
+slack
+outlook
+sharepoint
+onedrive
+dropbox
+salesforce
+jira
+confluence
+github
+gitlab
+notion
+trello
+asana
+workday
+zendesk
+hubspot
+docusign
+quickbooks
+linkedin
+facebook
+twitter
+instagram
+youtube
+whatsapp
+wikipedia
+internet
+wi-fi
+
+# [legal_terms]
+# --- parties and roles (never a person's name word) ---
+plaintiff
+plaintiffs
+defendant
+defendants
+claimant
+claimants
+respondent
+respondents
+petitioner
+petitioners
+appellant
+appellants
+appellee
+appellees
+applicant
+applicants
+complainant
+complainants
+accused
+victim
+victims
+witness
+witnesses
+expert
+experts
+juror
+jurors
+party
+parties
+counterparty
+counterparties
+licensor
+licensee
+lessor
+lessee
+landlord
+landlords
+tenant
+tenants
+subtenant
+buyer
+buyers
+seller
+sellers
+purchaser
+purchasers
+vendor
+vendors
+supplier
+suppliers
+customer
+customers
+client
+clients
+consumer
+consumers
+contractor
+contractors
+subcontractor
+subcontractors
+consultant
+consultants
+employer
+employers
+employee
+employees
+worker
+workers
+agent
+agents
+principal
+principals
+broker
+brokers
+dealer
+dealers
+distributor
+distributors
+franchisor
+franchisee
+franchisees
+manufacturer
+manufacturers
+developer
+developers
+provider
+providers
+recipient
+recipients
+disclosing party
+receiving party
+service provider
+borrower
+borrowers
+lender
+lenders
+guarantor
+guarantors
+surety
+creditor
+creditors
+debtor
+debtors
+mortgagor
+mortgagee
+pledgor
+pledgee
+assignor
+assignee
+transferor
+transferee
+grantor
+grantee
+donor
+donee
+settlor
+trustee
+trustees
+beneficiary
+beneficiaries
+executor
+executors
+executrix
+administrator
+administrators
+heir
+heirs
+legatee
+devisee
+testator
+testatrix
+decedent
+deceased
+estate
+guardian
+guardians
+ward
+conservator
+custodian
+custodians
+spouse
+spouses
+husband
+wife
+widow
+widower
+parent
+parents
+father
+mother
+son
+daughter
+child
+children
+minor
+minors
+sibling
+siblings
+brother
+sister
+partner
+partners
+member
+members
+shareholder
+shareholders
+stockholder
+stockholders
+director
+directors
+officer
+officers
+manager
+managers
+secretary
+treasurer
+chairman
+chairperson
+president
+founder
+owner
+owners
+proprietor
+investor
+investors
+insurer
+insurers
+insured
+policyholder
+underwriter
+adjuster
+reinsurer
+carrier
+shipper
+consignee
+consignor
+bailor
+bailee
+depositor
+auditor
+auditors
+accountant
+accountants
+attorney
+attorneys
+lawyer
+lawyers
+counsel
+solicitor
+solicitors
+barrister
+barristers
+advocate
+paralegal
+notary
+arbitrator
+arbitrators
+mediator
+mediators
+receiver
+liquidator
+administrator
+examiner
+inspector
+investigator
+prosecutor
+prosecutors
+magistrate
+magistrates
+judge
+judges
+justice
+justices
+clerk
+bailiff
+sheriff
+marshal
+coroner
+registrar
+commissioner
+commissioners
+ombudsman
+regulator
+regulators
+official
+officials
+authority
+authorities
+# --- documents and legal nouns ---
+agreement
+agreements
+contract
+contracts
+amendment
+amendments
+addendum
+addenda
+annex
+annexes
+appendix
+appendices
+exhibit
+exhibits
+schedule
+schedules
+attachment
+attachments
+recital
+recitals
+clause
+clauses
+section
+sections
+article
+articles
+paragraph
+paragraphs
+provision
+provisions
+term
+terms
+condition
+conditions
+covenant
+covenants
+warranty
+warranties
+representation
+representations
+indemnity
+indemnification
+indemnities
+guarantee
+guarantees
+waiver
+waivers
+release
+releases
+consent
+consents
+notice
+notices
+notification
+disclosure
+disclosures
+confidentiality
+non-disclosure
+nondisclosure
+non-compete
+noncompete
+non-solicitation
+assignment
+assignments
+novation
+termination
+expiration
+expiry
+renewal
+renewals
+breach
+breaches
+default
+defaults
+remedy
+remedies
+damages
+penalty
+penalties
+liquidated damages
+liability
+liabilities
+limitation
+limitations
+force majeure
+governing law
+jurisdiction
+venue
+arbitration
+mediation
+litigation
+dispute
+disputes
+settlement
+settlements
+claim
+claims
+counterclaim
+complaint
+complaints
+petition
+petitions
+motion
+motions
+brief
+briefs
+pleading
+pleadings
+answer
+reply
+rebuttal
+objection
+objections
+order
+orders
+decree
+decrees
+judgment
+judgments
+judgement
+judgements
+ruling
+rulings
+opinion
+opinions
+verdict
+verdicts
+sentence
+sentences
+injunction
+injunctions
+restraining order
+subpoena
+subpoenas
+summons
+warrant
+warrants
+affidavit
+affidavits
+declaration
+declarations
+deposition
+depositions
+testimony
+evidence
+exhibit
+discovery
+interrogatories
+hearing
+hearings
+trial
+trials
+appeal
+appeals
+docket
+case
+cases
+matter
+matters
+file
+files
+record
+records
+transcript
+transcripts
+minutes
+resolution
+resolutions
+bylaws
+articles of incorporation
+articles of association
+memorandum
+memoranda
+certificate
+certificates
+license
+licence
+licenses
+licences
+permit
+permits
+registration
+registrations
+filing
+filings
+deed
+deeds
+lease
+leases
+sublease
+mortgage
+mortgages
+lien
+liens
+pledge
+charge
+charges
+security
+securities
+bond
+bonds
+note
+notes
+debenture
+loan
+loans
+invoice
+invoices
+receipt
+receipts
+statement
+statements
+account
+accounts
+policy
+policies
+plan
+plans
+offer
+offers
+proposal
+proposals
+quotation
+quotations
+tender
+tenders
+bid
+bids
+purchase order
+work order
+change order
+report
+reports
+audit
+audits
+assessment
+assessments
+evaluation
+evaluations
+review
+reviews
+inspection
+inspections
+investigation
+investigations
+inquiry
+inquiries
+survey
+surveys
+# --- HR and employment nouns ---
+employment
+employment agreement
+employment contract
+offer letter
+job description
+performance review
+performance improvement plan
+disciplinary action
+grievance
+grievances
+dismissal
+redundancy
+layoff
+severance
+resignation
+retirement
+probation
+promotion
+demotion
+transfer
+secondment
+leave
+sick leave
+parental leave
+maternity leave
+paternity leave
+annual leave
+paid time off
+payroll
+salary
+salaries
+wages
+bonus
+bonuses
+commission
+overtime
+benefits
+pension
+pensions
+compensation
+reimbursement
+expenses
+timesheet
+timesheets
+onboarding
+training
+background check
+drug test
+# --- business nouns often part of a company name but never the name on their own ---
+business
+businesses
+company
+companies
+corporation
+corporations
+enterprise
+enterprises
+firm
+firms
+organization
+organizations
+organisation
+organisations
+entity
+entities
+subsidiary
+subsidiaries
+affiliate
+affiliates
+branch
+branches
+office
+offices
+headquarters
+department
+departments
+division
+divisions
+unit
+units
+team
+teams
+group
+groups
+board
+committee
+committees
+council
+councils
+association
+associations
+society
+societies
+union
+unions
+federation
+foundation
+foundations
+institute
+institutes
+institution
+institutions
+agency
+agencies
+bureau
+authority
+commission
+ministry
+government
+governments
+administration
+service
+services
+system
+systems
+program
+programs
+programme
+programmes
+project
+projects
+fund
+funds
+trust
+trusts
+plan
+scheme
+schemes
+account
+market
+markets
+industry
+industries
+sector
+sectors
+
+# [roles]
+manager
+managers
+director
+directors
+supervisor
+supervisors
+colleague
+colleagues
+coworker
+co-worker
+teammate
+assistant
+intern
+employee
+employees
+staff
+member
+members
+client
+customer
+patient
+tenant
+landlord
+contractor
+vendor
+supplier
+candidate
+applicant
+recruit
+recruiter
+agent
+broker
+attorney
+lawyer
+counsel
+solicitor
+barrister
+paralegal
+judge
+witness
+plaintiff
+defendant
+claimant
+respondent
+petitioner
+appellant
+officer
+detective
+inspector
+sergeant
+captain
+lieutenant
+nurse
+doctor
+physician
+surgeon
+therapist
+counselor
+counsellor
+teacher
+professor
+instructor
+coach
+trainer
+mentor
+mentee
+student
+pupil
+driver
+courier
+engineer
+developer
+designer
+analyst
+architect
+consultant
+advisor
+adviser
+accountant
+auditor
+banker
+founder
+cofounder
+co-founder
+ceo
+cfo
+cto
+coo
+president
+chairman
+chair
+owner
+partner
+associate
+spouse
+husband
+wife
+mother
+father
+son
+daughter
+brother
+sister
+friend
+neighbor
+neighbour
+roommate
+guest
+host
+sender
+recipient
+author
+editor
+reporter
+journalist
+photographer

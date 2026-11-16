@@ -1,0 +1,503 @@
+# RAGbase Shield company forms and company words (English). Written for RAGbase Shield, Apache-2.0.
+# Matching is case and accent insensitive. Sections (read by ragbase_shield.engine.locale, bundle("en")):
+#   [forms]   legal forms written after a company name ("Northvale Analytics, Inc."). The form stays in clear,
+#             the words before it are the company. One entry per line: "form<TAB>strong|weak". A strong form
+#             makes a company of one capitalised word before it; a weak form needs two words or a trigger.
+#             A spelled-out form (with spaces) is never a name word and never starts a company name.
+#   [suffix]  words that end a company name ("Brightwater Capital Partners"): the capitalised words before
+#             one of these form a company together with it, no legal form needed
+#   [generic] generic company words: never the distinctive part of a company name on their own, accepted
+#             inside a longer name ("Lakeshore Medical Center")
+#   [trigger] lower-case words right before a company name: "at X", "joined X", "client X"
+
+# [forms]
+inc	strong
+inc.	strong
+incorporated	strong
+llc	strong
+l.l.c.	strong
+llp	strong
+l.l.p.	strong
+lllp	strong
+lp	weak
+l.p.	strong
+ltd	strong
+ltd.	strong
+limited	strong
+plc	strong
+p.l.c.	strong
+pllc	strong
+p.c.	strong
+pc	weak
+corp	strong
+corp.	strong
+corporation	strong
+co.	strong
+co	weak
+company	weak
+companies	weak
+pty	strong
+pty.	strong
+pte	strong
+pte.	strong
+bhd	strong
+sdn	strong
+gmbh	strong
+ag	weak
+sa	weak
+s.a.	strong
+sas	strong
+sarl	strong
+srl	strong
+spa	weak
+s.p.a.	strong
+nv	weak
+n.v.	strong
+bv	weak
+b.v.	strong
+ab	weak
+oy	weak
+as	weak
+a/s	strong
+aps	weak
+kk	weak
+k.k.	strong
+ltda	strong
+sl	weak
+s.l.	strong
+dba	weak
+d/b/a	strong
+# spelled-out forms: never a name word, the company name ends before them
+limited liability company
+limited liability partnership
+limited partnership
+public limited company
+private limited company
+proprietary limited
+joint stock company
+joint venture
+general partnership
+sole proprietorship
+professional corporation
+professional association
+nonprofit corporation
+non-profit corporation
+not-for-profit corporation
+benefit corporation
+holding company
+parent company
+subsidiary company
+doing business as
+trading as
+
+# [suffix]
+group
+holdings
+holding
+partners
+partnership
+associates
+technologies
+technology
+systems
+solutions
+analytics
+labs
+laboratories
+software
+foods
+industries
+industrial
+capital
+bank
+bancorp
+insurance
+assurance
+airlines
+airways
+motors
+automotive
+pharmaceuticals
+pharma
+biotech
+biosciences
+therapeutics
+logistics
+consulting
+consultants
+advisors
+advisory
+media
+networks
+ventures
+trust
+services
+international
+global
+enterprises
+brands
+studios
+health
+healthcare
+energy
+financial
+investments
+investment
+securities
+realty
+properties
+construction
+engineering
+manufacturing
+electronics
+semiconductors
+communications
+telecom
+telecommunications
+entertainment
+publishing
+retail
+stores
+markets
+supermarkets
+restaurants
+hospitality
+hotels
+resorts
+cruises
+shipping
+freight
+transport
+transportation
+trucking
+rail
+railway
+railways
+aviation
+aerospace
+defense
+defence
+mining
+minerals
+metals
+steel
+chemicals
+plastics
+textiles
+apparel
+cosmetics
+beverages
+brewing
+brewery
+distillery
+winery
+vineyards
+farms
+agriculture
+foundation
+institute
+university
+college
+academy
+school
+hospital
+clinic
+medical
+dental
+law
+legal
+attorneys
+solicitors
+accountants
+architects
+designs
+design
+digital
+interactive
+innovations
+robotics
+dynamics
+sciences
+research
+mobility
+payments
+fintech
+cloud
+data
+devices
+instruments
+equipment
+machinery
+tools
+supply
+supplies
+distribution
+distributors
+wholesale
+imports
+exports
+trading
+commerce
+capital
+fund
+funds
+asset
+assets
+management
+partners
+alliance
+cooperative
+collective
+network
+exchange
+marketplace
+# tokens that join two names into a firm ("Smith & Wesson", "Baker and McKenzie")
+&
+and
+
+# [generic]
+american
+national
+international
+global
+general
+united
+universal
+central
+western
+eastern
+northern
+southern
+pacific
+atlantic
+first
+new
+royal
+imperial
+federal
+standard
+premier
+prime
+modern
+advanced
+applied
+integrated
+consolidated
+allied
+associated
+affiliated
+continental
+metropolitan
+regional
+community
+family
+home
+city
+county
+state
+world
+worldwide
+europe
+european
+asia
+america
+north
+south
+east
+west
+center
+centre
+corporation
+company
+companies
+corp
+incorporated
+limited
+enterprise
+enterprises
+organization
+organisation
+agency
+bureau
+office
+department
+division
+unit
+team
+club
+society
+association
+union
+federation
+league
+council
+board
+committee
+commission
+authority
+institute
+institution
+foundation
+trust
+fund
+group
+holdings
+services
+service
+systems
+solutions
+products
+industries
+technologies
+partners
+associates
+consulting
+management
+development
+resources
+capital
+financial
+finance
+insurance
+bank
+banking
+credit
+savings
+loan
+mortgage
+realty
+properties
+property
+estate
+construction
+engineering
+manufacturing
+medical
+health
+care
+pharmacy
+laboratories
+laboratory
+clinic
+hospital
+school
+college
+university
+academy
+library
+museum
+theater
+theatre
+studio
+studios
+media
+press
+publishing
+news
+network
+networks
+communications
+energy
+power
+electric
+gas
+oil
+water
+utilities
+telecom
+mobile
+wireless
+digital
+software
+data
+cloud
+online
+internet
+web
+tech
+technology
+labs
+research
+sciences
+science
+logistics
+transport
+transportation
+shipping
+freight
+airlines
+motors
+auto
+automotive
+foods
+food
+beverage
+brewing
+restaurant
+restaurants
+hotel
+hotels
+resort
+retail
+store
+stores
+market
+markets
+supply
+distribution
+trading
+imports
+exports
+brands
+brand
+designs
+design
+consultants
+advisors
+law
+legal
+accounting
+audit
+tax
+security
+solutions
+analytics
+ventures
+investments
+investment
+securities
+equity
+asset
+assets
+management
+
+# [trigger]
+at
+joined
+joining
+acquired
+acquiring
+client
+clients
+vendor
+vendors
+customer
+customers
+supplier
+suppliers
+partner
+partners
+competitor
+competitors
+firm
+startup
+subsidiary
+employer
+contractor
+agency
+company
+brand
+retailer
+manufacturer
+provider
+platform

@@ -1,0 +1,52 @@
+# RAGbase Shield synthetic towns (English). Written for RAGbase Shield, Apache-2.0: "postcode<TAB>town" lines;
+# a US line reads "ZIP<TAB>City, ST", a UK line "POSTCODE<TAB>Town". Used only in synthetic replacement mode.
+10001	New York, NY
+10016	New York, NY
+11201	Brooklyn, NY
+02108	Boston, MA
+02139	Cambridge, MA
+19103	Philadelphia, PA
+20001	Washington, DC
+21201	Baltimore, MD
+30303	Atlanta, GA
+33101	Miami, FL
+33602	Tampa, FL
+37203	Nashville, TN
+43215	Columbus, OH
+44114	Cleveland, OH
+48226	Detroit, MI
+53202	Milwaukee, WI
+55401	Minneapolis, MN
+60601	Chicago, IL
+63101	St. Louis, MO
+64105	Kansas City, MO
+73102	Oklahoma City, OK
+75201	Dallas, TX
+77002	Houston, TX
+78701	Austin, TX
+80202	Denver, CO
+84101	Salt Lake City, UT
+85004	Phoenix, AZ
+89101	Las Vegas, NV
+90012	Los Angeles, CA
+92101	San Diego, CA
+94103	San Francisco, CA
+95814	Sacramento, CA
+97204	Portland, OR
+98101	Seattle, WA
+SW1A 1AA	London
+EC2V 7HN	London
+W1D 3QF	London
+M1 1AE	Manchester
+B1 1BB	Birmingham
+LS1 4AP	Leeds
+G1 1XQ	Glasgow
+EH1 1YZ	Edinburgh
+BS1 4DJ	Bristol
+L1 8JQ	Liverpool
+NE1 4ST	Newcastle upon Tyne
+CF10 1EP	Cardiff
+S1 2HE	Sheffield
+NG1 5FS	Nottingham
+OX1 1DP	Oxford
+CB2 1TN	Cambridge

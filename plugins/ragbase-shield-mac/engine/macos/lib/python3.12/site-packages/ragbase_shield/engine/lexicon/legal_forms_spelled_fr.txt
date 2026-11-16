@@ -1,0 +1,239 @@
+# RAGbase Shield spelled-out legal forms (French). Written for RAGbase Shield, Apache-2.0.
+# Multi-word legal forms and statutory phrases: never a name, never masked. An organisation span that starts
+# with one of them loses the phrase and keeps the name after it ("société par actions simplifiée Kalvenor"
+# -> "Kalvenor"); a span equal to one of them is dropped. One-word entries are the short forms of these
+# phrases and count as legal forms. Matching is case and accent insensitive.
+
+# --- Commercial companies ---
+société par actions simplifiée
+société par actions simplifiée unipersonnelle
+société par actions simplifiée à associé unique
+société à responsabilité limitée
+société à responsabilité limitée unipersonnelle
+entreprise unipersonnelle à responsabilité limitée
+société anonyme
+société anonyme à conseil d'administration
+société anonyme à directoire
+société anonyme coopérative
+société anonyme d'économie mixte
+société anonyme sportive professionnelle
+société en nom collectif
+société en commandite simple
+société en commandite par actions
+société européenne
+société de droit étranger
+société de droit français
+société unipersonnelle
+société de fait
+société en participation
+société créée de fait
+société en formation
+société holding
+société mère
+société filiale
+
+# --- Civil and professional companies ---
+société civile
+société civile immobilière
+société civile professionnelle
+société civile de moyens
+société civile de construction vente
+société civile de placement immobilier
+société civile d'exploitation agricole
+société civile agricole
+société d'exercice libéral
+société d'exercice libéral à responsabilité limitée
+société d'exercice libéral par actions simplifiée
+société d'exercice libéral à forme anonyme
+société d'exercice libéral en commandite par actions
+société de participations financières de professions libérales
+association d'avocats
+association d'avocats à responsabilité professionnelle individuelle
+société pluri-professionnelle d'exercice
+société interprofessionnelle de soins ambulatoires
+
+# --- Cooperative, social, mixed and public forms ---
+société coopérative
+société coopérative de production
+société coopérative et participative
+société coopérative d'intérêt collectif
+société coopérative ouvrière de production
+société coopérative agricole
+société coopérative de consommation
+société coopérative d'habitants
+société d'économie mixte
+société d'économie mixte locale
+société d'économie mixte à opération unique
+société publique locale
+société publique locale d'aménagement
+société d'habitations à loyer modéré
+société anonyme d'habitations à loyer modéré
+société anonyme coopérative d'intérêt collectif pour l'accession à la propriété
+société anonyme coopérative de production d'habitations à loyer modéré
+office public de l'habitat
+entreprise sociale pour l'habitat
+établissement public
+établissement public administratif
+établissement public industriel et commercial
+établissement public de coopération intercommunale
+établissement public de coopération culturelle
+établissement public à caractère scientifique culturel et professionnel
+établissement public de santé
+établissement public foncier
+établissement d'hébergement pour personnes âgées dépendantes
+établissement et service d'aide par le travail
+régie autonome
+régie personnalisée
+régie dotée de la personnalité morale
+
+# --- Associations, groupings, funds ---
+association déclarée
+association loi 1901
+association loi de 1901
+association régie par la loi du 1er juillet 1901
+association reconnue d'utilité publique
+association syndicale libre
+association syndicale autorisée
+association syndicale constituée d'office
+association foncière urbaine
+association foncière urbaine libre
+association foncière de remembrement
+association de gestion et de comptabilité
+association intermédiaire
+fondation reconnue d'utilité publique
+fondation d'entreprise
+fondation abritée
+fonds de dotation
+fonds de pérennité
+groupement d'intérêt économique
+groupement européen d'intérêt économique
+groupement d'intérêt public
+groupement de coopération sanitaire
+groupement de coopération sociale et médico-sociale
+groupement d'employeurs
+groupement foncier agricole
+groupement foncier rural
+groupement forestier
+groupement agricole d'exploitation en commun
+groupement pastoral
+exploitation agricole à responsabilité limitée
+entreprise agricole à responsabilité limitée
+groupement de commandes
+groupement momentané d'entreprises
+fonds commun de placement
+fonds commun de placement à risques
+fonds commun de placement dans l'innovation
+fonds commun de titrisation
+fonds professionnel de capital investissement
+fonds d'investissement alternatif
+société de libre partenariat
+société d'investissement à capital variable
+organisme de placement collectif
+organisme de placement collectif immobilier
+mutuelle
+société d'assurance mutuelle
+société mutualiste
+union de mutuelles
+institution de prévoyance
+caisse de crédit mutuel
+caisse régionale de crédit agricole mutuel
+caisse d'épargne et de prévoyance
+banque populaire
+société de caution mutuelle
+
+# --- Co-ownership and real-estate statutory bodies (the co-ownership statute) ---
+syndicat des copropriétaires
+syndicat de copropriétaires
+syndicat des copropriétaires de l'immeuble
+syndicat des copropriétaires de la résidence
+syndicat des copropriétaires de l'ensemble immobilier
+syndicat principal
+syndicat secondaire
+syndicat coopératif
+union de syndicats
+union des syndicats
+association syndicale des propriétaires
+association des copropriétaires
+assemblée générale des copropriétaires
+conseil syndical
+syndic de copropriété
+syndic bénévole
+syndic provisoire
+syndic judiciaire
+administrateur provisoire de la copropriété
+indivision successorale
+indivision conventionnelle
+
+# --- Short forms of the phrases above (legal forms, never a name word) ---
+SASU
+SARLU
+EURL
+SNC
+SCS
+SCA
+SE
+SCI
+SCP
+SCM
+SCCV
+SCPI
+SCEA
+SEL
+SELARL
+SELAS
+SELAFA
+SELCA
+SPFPL
+AARPI
+SPE
+SISA
+SCOP
+SCIC
+SEM
+SEML
+SEMOP
+SPL
+SPLA
+HLM
+SA HLM
+OPH
+ESH
+EPA
+EPIC
+EPCI
+EPCC
+EPSCP
+EPS
+EPF
+EHPAD
+ESAT
+ASL
+ASA
+ASCO
+AFU
+AFUL
+AFR
+AGC
+FRUP
+GIE
+GEIE
+GIP
+GCS
+GCSMS
+GFA
+GFR
+GAEC
+EARL
+GME
+FCP
+FCPR
+FCPI
+FCT
+FPCI
+FIA
+SLP
+SICAV
+OPC
+OPCI
+SAM
+SCM

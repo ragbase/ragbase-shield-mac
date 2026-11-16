@@ -1,0 +1,417 @@
+# RAGbase Shield NER stop list (French). Written for RAGbase Shield, Apache-2.0.
+# Words and phrases that an NER span may never be made of alone: document and role nouns that a model reads
+# as an organisation or a person, defined contract terms, headings, closing formulas. Matching is case and
+# accent insensitive. A multi-word entry is a phrase: a span equal to it is dropped, a span that starts with
+# it loses the phrase ("liquidateur judiciaire Dupont" -> "Dupont").
+# Do not add words that can be the distinctive part of a person or company name.
+
+# --- Document and heading words ---
+objet
+référence
+références
+dossier
+dossiers
+pièce
+pièces
+annexe
+annexes
+article
+articles
+page
+pages
+chapitre
+section
+paragraphe
+titre
+sommaire
+table
+tableau
+figure
+note
+notes
+rapport
+mémo
+memo
+courrier
+courriel
+message
+messages
+réponse
+réunion
+ordre du jour
+compte rendu
+compte-rendu
+procès-verbal
+version
+brouillon
+projet
+projets
+proposition
+offre
+devis
+facture
+commande
+bon de commande
+bordereau
+reçu
+attestation
+certificat
+formulaire
+questionnaire
+fiche
+fiches
+liste
+inventaire
+planning
+calendrier
+agenda
+échéancier
+synthèse
+résumé
+conclusion
+introduction
+préambule
+exposé
+dispositif
+motifs
+moyens
+faits
+procédure
+historique
+contexte
+situation
+observations
+remarques
+commentaires
+recommandations
+
+# --- Roles, functions and defined contract terms (capitalised in contracts) ---
+partie
+parties
+demandeur
+demanderesse
+défendeur
+défenderesse
+requérant
+requérante
+appelant
+appelante
+intimé
+intimée
+client
+cliente
+clients
+fournisseur
+fournisseurs
+prestataire
+prestataires
+distributeur
+distributeurs
+concédant
+concessionnaire
+franchiseur
+franchisé
+licencié
+donneur d'ordre
+maître d'ouvrage
+maître d'œuvre
+sous-traitant
+sous-traitants
+bailleur
+preneur
+locataire
+vendeur
+acquéreur
+acheteur
+cédant
+cessionnaire
+prêteur
+emprunteur
+garant
+caution
+mandant
+mandataire
+agent
+courtier
+assureur
+assuré
+souscripteur
+bénéficiaire
+employeur
+salarié
+salariée
+salariés
+collaborateur
+collaborateurs
+stagiaire
+apprenti
+consultant
+utilisateur
+utilisateurs
+abonné
+membre
+membres
+adhérent
+associé
+associés
+actionnaire
+actionnaires
+gérant
+gérante
+dirigeant
+administrateur
+directeur
+directrice
+président
+présidente
+vice-président
+secrétaire
+trésorier
+responsable
+chef
+manager
+équipe
+territoire
+produits
+produit
+services
+service
+contrat
+accord
+convention
+avenant
+marque
+marques
+licence
+durée
+prix
+effet
+date d'effet
+date de signature
+signature
+signataire
+signataires
+lieu
+heure
+total
+montant
+tva
+société
+sociétés
+groupe
+entreprise
+établissement
+établissements
+cabinet
+direction
+département
+division
+filiale
+siège
+agence
+succursale
+bureau
+bureaux
+administration
+commission
+comité
+conseil
+assemblée
+tribunal
+cour
+juge
+juges
+greffe
+greffier
+chambre
+magistrat
+procureur
+huissier
+notaire
+avocat
+avocats
+expert
+experts
+médiateur
+arbitre
+liquidateur
+syndic
+copropriété
+copropriétaires
+immeuble
+résidence
+lot
+lots
+bâtiment
+parcelle
+terrain
+bien
+biens
+logement
+appartement
+local
+locaux
+
+# --- Greetings, closings, e-mail words ---
+bonjour
+bonsoir
+madame
+monsieur
+mesdames
+messieurs
+maître
+docteur
+cordialement
+salutations
+merci
+respectueusement
+amicalement
+expéditeur
+destinataire
+destinataires
+copie
+pièce jointe
+pièces jointes
+envoyé
+reçu le
+transféré
+répondre
+de la part de
+
+# --- Phrases: statutory roles and bodies (never a name; cut from the start of a longer span) ---
+liquidateur judiciaire
+liquidateur amiable
+administrateur judiciaire
+administrateur provisoire
+mandataire judiciaire
+mandataire liquidateur
+mandataire ad hoc
+mandataire de justice
+commissaire aux comptes
+commissaire de justice
+commissaire à l'exécution du plan
+commissaire priseur
+commissaire-priseur
+huissier de justice
+expert judiciaire
+expert comptable
+expert-comptable
+conseiller rapporteur
+conseiller référendaire
+avocat général
+premier président
+procureur de la république
+procureur général
+substitut du procureur
+juge des contentieux de la protection
+juge aux affaires familiales
+juge de l'exécution
+juge de la mise en état
+juge des référés
+juge des enfants
+juge d'instruction
+juge des libertés et de la détention
+juge de l'application des peines
+juge commissaire
+juge-commissaire
+président du tribunal
+présidente du tribunal
+président de la chambre
+présidente de la chambre
+conseil syndical
+conseil d'administration
+conseil de surveillance
+conseil de famille
+assemblée générale
+assemblée générale ordinaire
+assemblée générale extraordinaire
+comité social et économique
+comité d'entreprise
+comité de direction
+direction générale
+direction juridique
+direction financière
+direction commerciale
+direction technique
+direction des ressources humaines
+ressources humaines
+service juridique
+service comptable
+service client
+service clients
+service commercial
+service des ressources humaines
+service du personnel
+département juridique
+contrôle de gestion
+maître d'ouvrage
+maître d'œuvre
+donneur d'ordre
+chef de projet
+chef d'entreprise
+chef de service
+chef d'équipe
+responsable juridique
+responsable commercial
+responsable des ressources humaines
+directrice générale
+directeur juridique
+directeur financier
+directeur commercial
+directeur technique
+directeur des ressources humaines
+gérant majoritaire
+gérant minoritaire
+associé unique
+actionnaire unique
+représentant légal
+représentante légale
+représentant du personnel
+représentant syndical
+délégué syndical
+délégué du personnel
+médecin du travail
+inspecteur du travail
+contrôleur du travail
+organisme de formation
+organisme collecteur
+caisse de retraite
+caisse de retraite complémentaire
+mutuelle santé
+compagnie d'assurance
+compagnie d'assurances
+établissement bancaire
+établissement de crédit
+établissement de paiement
+établissement public
+collectivité territoriale
+collectivités territoriales
+personne physique
+personne morale
+personnes physiques
+personnes morales
+tiers détenteur
+tiers saisi
+partie civile
+partie adverse
+partie demanderesse
+partie défenderesse
+ministère public
+ordre public
+force majeure
+cas de force majeure
+bonne foi
+mauvaise foi
+date d'effet
+date de prise d'effet
+date de signature
+durée du contrat
+objet du contrat
+conditions générales
+conditions générales de vente
+conditions particulières
+propriété intellectuelle
+données personnelles
+données à caractère personnel
+secret professionnel
+secret des affaires

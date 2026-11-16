@@ -1,0 +1,412 @@
+# RAGbase Shield whitelist (French). Written for RAGbase Shield, Apache-2.0.
+# Phrases that the rules and the optional NER must never mask. Matching is case and accent
+# insensitive, token by token. A rule/NER span that overlaps one of these phrases is dropped.
+# Court names followed by a city ("Tribunal judiciaire de Lyon") are protected by a rule in
+# names.py that extends the phrase over the city, so the city stays in clear.
+# Do not add words that can be part of a person or company name (use legal_terms_fr.txt).
+
+# --- Courts and judicial bodies ---
+cour de cassation
+conseil d'état
+conseil d'etat
+conseil constitutionnel
+cour d'appel
+cour administrative d'appel
+tribunal judiciaire
+tribunal de grande instance
+tribunal d'instance
+tribunal de proximité
+tribunal de commerce
+tribunal des activités économiques
+tribunal administratif
+tribunal correctionnel
+tribunal de police
+tribunal pour enfants
+tribunal des affaires de sécurité sociale
+tribunal du contentieux de l'incapacité
+tribunal paritaire des baux ruraux
+tribunal des conflits
+tribunal arbitral
+pôle social
+conseil de prud'hommes
+conseil des prud'hommes
+conseil de prudhommes
+cour d'assises
+cour criminelle départementale
+cour de justice de la république
+haute cour
+cour nationale du droit d'asile
+cour des comptes
+chambre régionale des comptes
+juge aux affaires familiales
+juge de l'exécution
+juge des contentieux de la protection
+juge des référés
+juge de la mise en état
+juge d'instruction
+juge des libertés et de la détention
+juge des enfants
+juge de l'application des peines
+juge-commissaire
+conseiller de la mise en état
+premier président
+première présidente
+procureur de la république
+procureur général
+avocat général
+ministère public
+parquet national financier
+parquet général
+chambre sociale
+chambre commerciale
+chambre commerciale financière et économique
+chambre criminelle
+chambre civile
+première chambre civile
+deuxième chambre civile
+troisième chambre civile
+1re chambre civile
+2e chambre civile
+3e chambre civile
+assemblée plénière
+chambre mixte
+bureau de conciliation et d'orientation
+bureau de jugement
+formation de référé
+section encadrement
+section industrie
+section commerce
+section activités diverses
+section agriculture
+cass. soc.
+cass. civ.
+cass. com.
+cass. crim.
+cass. ass. plén.
+cass. ch. mixte
+cjue
+cjce
+cour de justice de l'union européenne
+tribunal de l'union européenne
+cedh
+cour européenne des droits de l'homme
+cour internationale de justice
+comité européen des droits sociaux
+cour pénale internationale
+
+# --- Institutions, authorities, public bodies ---
+cnil
+commission nationale de l'informatique et des libertés
+amf
+autorité des marchés financiers
+acpr
+autorité de contrôle prudentiel et de résolution
+urssaf
+pôle emploi
+france travail
+dgccrf
+dgfip
+direction générale des finances publiques
+direction générale du travail
+autorité de la concurrence
+barreau de paris
+ordre des avocats
+conseil de l'ordre
+conseil national des barreaux
+cnb
+conférence des bâtonniers
+caisse nationale des barreaux français
+cnbf
+carpa
+inpi
+insee
+banque de france
+trésor public
+caisse des dépôts
+caisse des dépôts et consignations
+cpam
+caisse primaire d'assurance maladie
+caf
+caisse d'allocations familiales
+msa
+mutualité sociale agricole
+carsat
+cnav
+cnam
+agirc-arrco
+unédic
+unedic
+ags
+cgea
+inspection du travail
+dreets
+direccte
+service de santé au travail
+médecine du travail
+préfecture
+sous-préfecture
+assemblée nationale
+sénat
+gouvernement
+ministère de la justice
+ministère du travail
+ministère de l'économie
+journal officiel
+bodacc
+infogreffe
+registre du commerce et des sociétés
+registre national des entreprises
+répertoire sirene
+rcs
+rne
+greffe du tribunal de commerce
+conseil supérieur de la magistrature
+défenseur des droits
+haute autorité de santé
+arcep
+arcom
+anssi
+tracfin
+ademe
+commission européenne
+union européenne
+parlement européen
+conseil de l'europe
+conseil de l'union européenne
+comité européen de la protection des données
+cepd
+edpb
+oit
+ocde
+onu
+gendarmerie nationale
+police nationale
+république française
+état français
+chambre des notaires
+conseil supérieur du notariat
+chambre nationale des commissaires de justice
+ordre des experts-comptables
+compagnie nationale des commissaires aux comptes
+haut conseil du commissariat aux comptes
+légifrance
+legifrance
+eur-lex
+judilibre
+cnil.fr
+
+# --- Laws, codes, texts ---
+code civil
+code du travail
+code de commerce
+code pénal
+code de procédure civile
+code de procédure pénale
+code de la consommation
+code monétaire et financier
+code général des impôts
+code de la sécurité sociale
+code de la propriété intellectuelle
+code de l'urbanisme
+code de la construction et de l'habitation
+code de l'environnement
+code de la santé publique
+code des assurances
+code de la route
+code des relations entre le public et l'administration
+code de justice administrative
+code général des collectivités territoriales
+code de l'organisation judiciaire
+code des procédures civiles d'exécution
+code de l'entrée et du séjour des étrangers et du droit d'asile
+code rural et de la pêche maritime
+code de l'éducation
+code des transports
+code de la mutualité
+code de la commande publique
+code général de la propriété des personnes publiques
+livre des procédures fiscales
+rgpd
+règlement général sur la protection des données
+loi informatique et libertés
+ai act
+règlement sur l'intelligence artificielle
+dsa
+dma
+nis 2
+dora
+convention européenne des droits de l'homme
+convention de sauvegarde des droits de l'homme et des libertés fondamentales
+traité sur le fonctionnement de l'union européenne
+tfue
+tue
+charte des droits fondamentaux
+déclaration des droits de l'homme et du citoyen
+constitution du 4 octobre 1958
+convention collective
+convention collective nationale
+syntec
+accord national interprofessionnel
+bulletin officiel
+journal officiel de la république française
+jorf
+
+# --- Legal terms that start with a capital in judgments and pleadings ---
+attendu
+attendu que
+considérant
+considérant que
+par ces motifs
+pour ces motifs
+a ces causes
+à ces causes
+plaise au tribunal
+plaise à la cour
+plaise au conseil
+sous toutes réserves
+dire et juger
+exposé du litige
+faits et procédure
+moyens et prétentions
+motifs de la décision
+dispositif
+au fond
+in limine litis
+ad litem
+ad hoc
+de cujus
+erga omnes
+ultra petita
+infra petita
+nota bene
+post-scriptum
+ci-après dénommé
+ci-après dénommée
+d'une part
+d'autre part
+il a été convenu ce qui suit
+il a été arrêté et convenu ce qui suit
+lu et approuvé
+bon pour accord
+bon pour pouvoir
+fait à
+article 700
+exécution provisoire
+dommages et intérêts
+dommages-intérêts
+cause réelle et sérieuse
+faute grave
+faute lourde
+rupture conventionnelle
+mise en demeure
+lettre recommandée avec accusé de réception
+accusé de réception
+lrar
+smic
+cdi
+cdd
+tva
+ttc
+ht
+kbis
+naf
+ape
+siren
+siret
+cedex
+iban
+bic
+rib
+ugc
+cse
+cssct
+chsct
+pse
+ijss
+rgpd
+dpo
+cgv
+cgu
+pdf
+
+# --- Months and days ---
+janvier
+février
+mars
+avril
+mai
+juin
+juillet
+août
+septembre
+octobre
+novembre
+décembre
+janv.
+févr.
+sept.
+oct.
+nov.
+déc.
+lundi
+mardi
+mercredi
+jeudi
+vendredi
+samedi
+dimanche
+
+# --- v0.2 (NER builder): public bodies and jurisdictions the NER reads as organisations ---
+conseil régional
+conseil départemental
+conseil général
+conseil municipal
+conseil communautaire
+communauté de communes
+communauté d'agglomération
+communauté urbaine
+centre communal d'action sociale
+centre intercommunal d'action sociale
+agence régionale de santé
+direction départementale
+direction régionale
+chambre des métiers et de l'artisanat
+chambre d'agriculture
+éducation nationale
+ministère de l'intérieur
+ministère des armées
+ministère de la santé
+ministère de l'éducation nationale
+ministère de l'enseignement supérieur
+ministère de la culture
+ministère de la transition écologique
+ministère de l'europe et des affaires étrangères
+ministère des affaires étrangères
+ministère de l'agriculture
+ministère des solidarités
+haute autorité pour la transparence de la vie publique
+commission d'accès aux documents administratifs
+cada
+caisse nationale d'assurance maladie
+assurance maladie
+sécurité sociale
+caisse nationale d'assurance vieillesse
+direction générale des entreprises
+agence nationale de l'habitat
+office français de protection des réfugiés et apatrides
+ofpra
+office français de l'immigration et de l'intégration
+ofii
+bureau d'aide juridictionnelle
+aide juridictionnelle
+service d'accueil unique du justiciable
+maison de justice et du droit
+tribunal de première instance
+tribunal fédéral
+cour suprême
+cour de justice
+supreme court
+high court
+court of appeal
+crown court
+district court

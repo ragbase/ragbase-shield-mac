@@ -1,0 +1,257 @@
+# RAGbase Shield vocabulary (French). Written for RAGbase Shield, Apache-2.0.
+# Ordinary French words (nouns, adjectives, verb forms, adverbs) that appear with a capital at a sentence start,
+# in a heading or in an all-capital line. A one-word NER candidate that is one of these is not a name by itself
+# (it needs a title, a greeting or a signature cue); in an all-capital line a candidate made only of these words
+# is never a name. Many of them are also surnames (Petit, Blanc, Fontaine): that is on purpose, a bare common
+# word without context is not masked, a registered person keeps its own rules. Matching is case and accent
+# insensitive. Function words live in stopwords_fr.txt, legal nouns in legal_terms_fr.txt; this file completes them.
+
+# --- Verbs: infinitives ---
+accepter accéder accompagner accomplir accorder accuser acheter achever acquérir adapter adresser admettre
+adopter affirmer agir aider aimer ajouter aller amener analyser annoncer annuler apercevoir apparaître appartenir
+appeler appliquer apporter apprendre approcher approuver appuyer arrêter arriver assister assurer atteindre
+attendre attirer augmenter autoriser avancer avertir avoir baisser bâtir battre bénéficier bloquer boire bouger
+calculer casser céder cesser changer charger chercher choisir citer classer commencer communiquer comparer
+compléter comprendre compter concerner conclure conduire confier confirmer connaître consacrer conseiller
+considérer constater constituer construire consulter contacter contenir continuer contribuer contrôler convenir
+corriger couper courir coûter couvrir craindre créer croire déborder décider déclarer découvrir décrire défendre
+définir dégager demander démontrer dépasser dépendre déplacer déposer désigner détenir déterminer développer
+devenir devoir différer diminuer dire diriger discuter disparaître disposer distinguer donner dormir douter
+écarter échanger échapper écouter écrire effectuer élever éliminer employer empêcher emporter encourager engager
+enlever entendre entrer envisager envoyer épouser espérer essayer estimer établir éviter examiner excuser exercer
+exiger exister expliquer exposer exprimer fabriquer faciliter faire falloir fermer figurer finir fixer fonder
+former fournir frapper gagner garantir garder gérer glisser habiter hésiter ignorer imaginer imposer indiquer
+informer inscrire insister installer interdire intéresser interroger intervenir introduire inviter jeter joindre
+jouer juger justifier laisser lancer lever lier limiter lire livrer loger louer maintenir manquer marcher
+marquer mener mesurer mettre modifier montrer mourir naître négocier noter nourrir obliger observer obtenir
+occuper offrir organiser oublier ouvrir paraître parler partager participer partir parvenir passer payer penser
+perdre permettre persuader placer plaire porter poser posséder poursuivre pousser pouvoir précéder préciser
+préférer prendre préparer présenter prétendre prévenir prévoir produire profiter promettre proposer protéger
+prouver provoquer publier quitter raconter rappeler rapporter réagir réaliser recevoir rechercher réclamer
+reconnaître réduire refuser regarder régler regretter rejeter relever remarquer remettre remplacer remplir
+rencontrer rendre renoncer rentrer renvoyer répandre réparer répéter répondre reposer reprendre représenter
+réserver résister résoudre respecter rester retenir retirer retourner retrouver réunir réussir revenir réviser
+risquer rompre saisir satisfaire sauver savoir sembler sentir séparer servir signaler signer situer sortir
+souffrir souhaiter soulever soumettre soutenir subir suffire suggérer suivre supporter supposer supprimer
+surprendre surveiller tâcher tenir tenter terminer tirer tomber toucher tourner traduire traiter transformer
+transmettre travailler traverser tromper trouver unir utiliser valoir vendre venir vérifier verser vivre voir
+voter vouloir voyager
+
+# --- Verbs: frequent conjugated and participle forms (sentence starts, headings, operative parts in capitals) ---
+accepte acceptons accepté acceptée acceptés accepte-t-il accorde accordons accordé accordée accordés accordant
+admet admettons admis admise adopte adopté adoptée adoptés affirme affirmé agit agissant ajoute ajouté annule
+annulons annulé annulée annulés appelle appelé appelée applique appliqué applicable applicables approuve
+approuvé approuvée arrête arrêtons arrêté atteste attestons attesté attendu attendus autorise autorisons
+autorisé autorisée avons ayant ayons cesse cessé change changé charge chargé chargée chargés chargée choisi
+choisie commence commencé compte comptons comprend compris comprise concerne concernant concerné concernée
+conclut concluons conclu conclue condamne condamnons condamné condamnée condamnés confirme confirmons confirmé
+confirmée confirmés connaît connu connue considère considérant considéré constate constatons constaté
+constatée constitue constituons constitué constituée contient contenu contenue continue continué convient convenu
+convenue convenus décide décidons décidé décidée déclare déclarons déclaré déclarée déclarés déboute déboutons
+débouté déboutée déboutés défini définie définis demande demandons demandé demandée demandés désigne désignons
+désigné désignée désignés détient détenu détenue détermine déterminé devient devenu devra devront dira diront
+dis disons disant dit dite dits donne donnons donné donnée données doit doivent écarte écartons écarté écartée
+enjoint enjoignons entend entendons entendu entendue envoie envoyé envoyée est était étaient été étant exerce
+exercé exige exigé existe existant fait faisons faisant faite faits fait-il fixe fixons fixé fixée fixés fut
+furent impose imposé indique indiqué indiquée infirme infirmons infirmé infirmée interdit invite invitons invité
+joint jointe joints juge jugeons jugé jugée jugés laisse laissé lu lue mentionne mentionné mentionnée met
+mettons mis mise modifie modifié modifiée montre montré note notons noté ordonne ordonnons ordonné ordonnée
+ordonnés ouvre ouvert ouverte paraît parle peut peuvent porte portant porté portée pose posé précise précisé
+prend prenons pris prise prises présente présenté présentée prévoit prévu prévue prévus prononce prononçons
+prononcé prononcée propose proposé proposée rappelle rappelons rappelé reçoit reçu reçue reconnaît reconnu
+reconnue refuse refusé rejette rejetons rejeté rejetée rejetés relève relevé rend rendons rendu rendue renvoie
+renvoyons renvoyé renvoyée répond répondu représente représenté réserve réservons réservé réservée reste restant
+résulte résultant retient retenons retenu retenue réforme réformons réformé réformée saisit saisi saisie
+semble sera seront sont soit soient statue statuons statuant suit suivant suivi suivie sursoit sursis tient
+tenu tenue tire trouve trouvé va vaut vient vise visé visée voit vu vue
+
+# --- Nouns: everyday life ---
+accès accident achat action actions activité adresse affaire affaires âge aide air amour an année années appel
+après-midi argent arrivée art article attente attitude auteur automne avantage avenir avis bain base
+besoin bois boîte bout branche bras bruit but cadeau cadre café campagne capitale carte cas cause centre chaîne
+chambre champ chance changement chanson chapeau charge chat chaussure chef chemin cheval cheveux chien chiffre
+choix chose ciel cinéma classe clé client climat cœur coin colère combat commerce compagnie confiance conflit
+connaissance conseil contact conte contrôle corps côte côté couleur coup cour courage cours course cuisine
+culture danger date début décision degré déjeuner demain demande dent départ dépense dernier désir dessin
+détail dieu différence difficulté dîner direction discours distance doigt domaine dos doute droit eau échange
+école écran effet effort église élément emploi endroit énergie enfance enfant ennemi ensemble entrée envie
+époque équipe erreur espace espèce espoir esprit essai est étage état été étoile étude événement exemple
+expérience face façon faim famille femme fenêtre fer fête feu figure fille film fils fin fleur foi fois fond
+force forêt forme fortune frère froid fruit garçon gauche genre gens geste glace goût gouvernement grâce groupe
+guerre habitude hasard hauteur herbe heure histoire hiver homme honneur hôtel huile idée image importance
+industrie instant intérêt jambe jardin jeu jeunesse joie jour journal journée juge justice lait langue lecture
+lettre lèvre liberté lieu ligne lit livre loi lumière lune lutte machine magasin main maison maître mal maladie
+manière marché mariage matin mémoire mer mère mesure métier milieu ministre minute mode moment monde montagne
+mort mot moteur mouvement moyen musique nature neige nez niveau noir nom nombre nord nourriture nouvelle nuit
+numéro objet occasion œil œuvre oiseau ombre oncle opinion or ordre oreille origine ouest ouvrier page pain
+paix papier parent paroi parole part parti passage passé patron pays paysan peau peine pensée père période
+personne peuple peur phrase pièce pied pierre place plaisir plan plante pluie poche poids point poisson police
+politique pont port porte position poste pouvoir premier présence président presse preuve prince principe
+printemps prison prix problème produit professeur profit progrès projet promenade propos propriété public
+puissance qualité quartier question raison rapport région règle reine relation religion rencontre repas
+réponse repos reste résultat retard retour rêve réunion révolution rire rivière roi rôle route rue ruine
+saison salle sang santé science secret semaine sens sentiment service seuil siècle signe silence situation
+société sœur soin soir soldat soleil somme sommet sort sorte souci souffle sourire souvenir sport succès sud
+suite sujet surface table tableau tâche taille tante tas temps terre tête texte théâtre titre toit ton tour
+train trait travail tribunal trou troupe type union usage usine vacances valeur vent vérité verre vie vieillard
+village ville vin visage visite vitesse voie voisin voiture voix volonté voyage vue zone
+
+# --- Nouns: business, work and administration ---
+abonnement accord achats acompte activités actualité actualités administration adhésion agence agenda
+alimentation amélioration aménagement analyse animation annonce appui approche approvisionnement arrêt
+assemblée assistance association assurance atelier attestation audit augmentation autorisation avance avancement
+avenant bâtiment bénéfice besoins bilan budget bureau bureaux cabinet calendrier campagne candidat candidature
+capacité carrière catalogue certificat charges chiffre chiffres chantier circulation clientèle collaboration
+collecte collectivité commande commandes commerce commercial commission communauté communication compétence
+compétences comptabilité compte comptes conception concours concurrence condition conditions conférence
+confidentialité congé congés connexion conséquence consommation consultation contenu contrat contribution
+convention coopération coordination copie correspondance cotisation cotisations courrier coût coûts création
+crédit critère critères croissance débat décret défaut délai délais délégation délibération démarche demande
+démission département dépenses dépôt description destination développement devis diffusion diplôme direction
+directive discipline disposition dispositif distribution division document documentation domicile don données
+dossier durée échéance économie édition éducation effectif effectifs élection embauche emplacement emploi
+employeur engagement enquête enregistrement enseigne enseignement entretien entreprise entreprises entrepôt
+environnement envoi équipement équipements espace établissement évaluation évolution examen exécution exemplaire
+exercice exigence exigences expédition expertise exploitation exportation exposition fabrication facturation
+facture factures faute fichier fiche filière financement fiscalité fonction fonctionnement fonctions fonds
+formation formulaire fourniture fournitures frais gamme garantie gestion gouvernance grille groupe guide
+habilitation hébergement horaire horaires hypothèse identifiant identité immatriculation immobilier impact
+importation impôt impôts indemnité indicateur indicateurs information informations infrastructure innovation
+inscription inspection installation instruction instructions intégration intervention inventaire investissement
+investissements jeton journée licence liste livraison local locaux logement logiciel logistique loyer maintenance
+majoration manuel marché marchés marge matériel membre mention mesures méthode mise mission missions mobilité
+modalité modalités modèle modification montant moyens mutation négociation nomination norme normes notice
+notification objectif objectifs obligation offre offres opération opérations option ordinateur organisation
+organisme orientation outil outils ouverture paiement paiements panier participation partenaire partenariat
+patrimoine pénalité performance périmètre permis personnel perspective pièces pilotage plainte planification
+planning plateforme politique portefeuille poste postes pratique préavis prestation prestations prévention
+prévision prime primes priorité procédé procédure processus production productivité produits profil programme
+projet projets promotion proposition propriété protection protocole publication publicité qualité quantité
+rachat rapport rapports réception réclamation recours recrutement recette recettes redevance réduction référence
+référentiel règlement réglementation régime relance relations relevé rémunération remboursement remise
+renouvellement rentabilité renseignement renseignements réparation répartition réseau réserve résiliation
+résidence responsabilité ressource ressources restauration résultat résultats retraite réunion revenu revenus
+révision risque risques salaire salaires secteur sécurité séminaire séance service services session siège
+signature site situation solde solution solutions sondage sortie soumission sous-traitance soutien statut
+statuts stock stockage stratégie structure subvention suivi support surveillance synthèse système tarif tarifs
+taux technique technologie télécommunications téléphone tendance territoire test tests traitement transaction
+transfert transition transport transports travaux trésorerie unité usage utilisateur utilisation validation
+valeur valeurs vente ventes version visite vocation volume
+
+# --- Nouns: law and procedure (completing legal_terms_fr.txt) ---
+abus acquittement acte actes adjudication administré affectation agrément allégation allocation amende
+antériorité apport appréciation arbitrage arrérages arrhes astreinte audition autorité aveu avocats bail baux
+bordereau bornage caducité capacité carence cassation cause cautionnement cession charge chose citation clause
+clôture codébiteur commandement commission comparution compétence compromis conciliation condamnation confiscation
+confusion connexité consentement constat constitution contentieux contestation contradictoire contrainte
+contravention contribution convocation copropriété créance créances culpabilité débouté déchéance déclaration
+défaillance défaut déféré délibéré délit délivrance demeure dénonciation dépens dépôt désistement détention
+dette dettes devoir diligence diligences discernement dissolution dol dommage dommages domicile donation
+échéance effet élection emprise enquête enrichissement entrave épuisement équité erreur espèce état éviction
+exception exclusion excuse exécution exequatur expulsion extinction extrait faillite fausseté faute forclusion
+formalité formalités forme fraude garantie grief griefs grosse hypothèque immatriculation immunité imputation
+incapacité incident incompétence indemnisation indivision infraction injonction inopposabilité inscription
+instance intention interdiction interprétation intervention irrecevabilité jonction jouissance jugement
+légalité légitimité lésion levée liquidation litispendance majorité mandat mesure minorité mise motif motifs
+moyen moyens nantissement nationalité négligence non-lieu notification novation nullité obligation offre
+opposabilité opposition ordonnance ouverture paiement partage peine peines pension perte pertes plaidoirie
+plainte poursuite poursuites pouvoir préjudice prescription présomption prestation prétention prétentions preuve
+privilège procès procuration prolongation promesse propriété prorogation protêt provision publicité qualité
+quittance radiation rapport ratification réassignation recel recevabilité réclamation récompense réconciliation
+reconduction reconnaissance recouvrement rectification récusation rédaction redressement réduction réfaction
+réformation refus régularisation réitération relaxe relevé remise renonciation renvoi réparation répétition
+répudiation réquisition réquisitions rescision réserve réserves résiliation résolution responsabilité
+restitution rétablissement retrait rétractation révocation révision saisie saisies sanction sanctions séquestre
+servitude signification simulation solidarité sommation soulte soumission subrogation substitution succession
+suppression sursis suspension taxation taxe taxes témoignage terme tierce tiers titre titres tolérance
+transaction transcription transfert transmission trouble tutelle usufruit usure validité vente ventes
+vérification versement vice vices violation visa voie voies vol
+
+# --- Adjectives ---
+absent absolu abstrait actif actuel adjoint administratif admissible adverse aérien affectif agricole aimable
+amiable ancien animal annuel anonyme apparent applicable approprié arrière artificiel artistique associé
+atlantique attentif autre avantageux bas beau bel belle bénéfique blanc blanche bleu bon bonne bref brun
+brute capable capital carré caustique célèbre central certain chaud cher chère civil civile clair classique
+collectif commercial commun complet complexe compris concret confidentiel conforme connu conscient considérable
+constant content contraire convenable correct courant court criminel critique culturel curieux dangereux
+définitif délicat demi dernier différent difficile digne direct disponible distinct divers domestique double
+doux droit dur durable économique éducatif effectif efficace égal électrique élégant entier environnant
+épais essentiel étonnant étranger étroit européen éventuel exact excellent exceptionnel extérieur externe
+extraordinaire facile faible familial fameux faux favorable féminin fidèle final financier fin fixe fort fou
+frais franc français frappant froid futur gai général généreux gentil global grand grave gris gros habituel
+haut heureux historique honnête horrible humain idéal illégal immédiat immense immobilier important impossible
+indépendant indirect individuel industriel inférieur initial inquiet intellectuel intelligent intérieur interne
+international intime inutile joli juste large léger lent libre local logique long lourd majeur malade maritime
+massif matériel mauvais médical même mensuel meilleur mental militaire mince minime mobile moderne modeste
+moindre moral mort moyen municipal mutuel national naturel nécessaire net neuf noble noir nombreux normal
+nouveau nouvelle nul numérique obligatoire officiel ordinaire original ouvert pâle pareil parfait particulier
+partiel passé pauvre perdu permanent personnel petit petite physique plein politique populaire possible
+postérieur pratique précédent précieux précis premier présent principal privé probable prochain profond
+propre provisoire prudent public pur quotidien rapide rare réel régional régulier relatif religieux rentable
+responsable riche rigoureux rond rouge rural sage saint sain scientifique sec second secret semblable sérieux
+seul sévère significatif simple sincère social solide sombre souple spécial spécifique stable strict suffisant
+supérieur sûr technique temporaire terrible total traditionnel tranquille triste unique urbain urgent utile
+vaste véritable vert vide vieux vif violent visible vrai
+
+# --- Adverbs and connectors ---
+actuellement ailleurs ainsi alors aujourd'hui auparavant aussi aussitôt autant autrefois autrement beaucoup
+bientôt bref cependant certainement certes comment d'abord d'ailleurs davantage debout dedans dehors déjà
+demain depuis derrière désormais dessous dessus donc dorénavant également encore enfin ensemble ensuite
+environ évidemment exactement finalement généralement heureusement hier ici jadis jamais justement là-bas
+longtemps lors maintenant malgré malheureusement même moins naturellement néanmoins notamment nulle part
+parfois particulièrement partout pendant peut-être plutôt pourquoi pourtant précisément premièrement
+présentement principalement probablement puis quand quelquefois rarement récemment seulement simplement
+sinon soudain souvent surtout tant tantôt tard tellement tôt toujours toutefois très trop vite volontiers
+vraiment
+
+# --- Buildings, property and places (generic nouns) ---
+abri allée appartement fontaine puits arrière-cour ascenseur atelier balcon bâtiment bureau cabane cave cellier chambre
+chantier château cité clôture cour couloir cuisine dépendance entrepôt escalier étage ferme galerie garage
+grange grenier hangar hall immeuble jardin local logement lotissement maison mur murs parcelle parking pavillon
+pièce place placard plateau porche propriété quai quartier résidence salle salon sous-sol studio terrain
+terrasse toit tour usine véranda villa zone
+
+# --- Geography and direction (generic) ---
+nord sud est ouest centre banlieue bourg campagne canton capitale cité commune contrée département district
+frontière hameau île littoral mairie métropole montagne pays province région rivage territoire vallée village
+ville
+
+# --- Finance and accounting ---
+achat actif amortissement avoir banque bénéfice bilan budget caisse capital charge chèque chiffre commission
+compte coût créance crédit débit découvert dépense dette dividende emprunt encours épargne espèces excédent
+facture fonds frais gain impôt intérêt investissement liquidité marge montant obligation paiement passif perte
+placement prêt prime provision recette redevance règlement remboursement rendement rente réserve résultat
+revenu solde taux titre trésorerie valeur versement virement
+
+# --- Health and the person ---
+accident allergie assistance blessure certificat chirurgie consultation diagnostic douleur examen fatigue
+handicap hôpital infirmier infirmière maladie médecin médecine médicament naissance opération ordonnance patient
+patiente prescription radiographie santé séjour soins traitement urgence vaccination
+
+# --- Time and measure ---
+année années an ans jour jours mois semaine semaines heure heures minute minutes seconde siècle trimestre
+semestre décennie période délai durée date dates échéance instant moment saison printemps été automne hiver
+matin midi soir nuit veille lendemain hier demain aujourd'hui début fin milieu moitié quart tiers double triple
+total somme nombre numéro quantité mesure taille longueur largeur hauteur profondeur surface volume poids
+distance vitesse température degré pourcentage proportion moyenne maximum minimum kilomètre mètre centimètre
+kilogramme gramme litre tonne hectare euro euros centime centimes million millions milliard milliards mille
+cent cents première deuxième troisième quatrième cinquième sixième septième huitième neuvième dixième dernière
+premier second seconde
+
+# --- Technology and communication ---
+accès adresse application archive base bureau câble canal caméra carte clavier cloud code compte connexion
+console copie courriel données dossier écran enregistrement fichier fichiers formulaire identifiant imprimante
+informatique internet lien liens logiciel logiciels machine matériel message messagerie mot mots navigateur
+ordinateur page paramètre paramètres plateforme portable programme réseau sauvegarde serveur session site
+support système tableau téléchargement téléphone terminal utilisateur version vidéo web
+
+# --- Trade and products (generic) ---
+alimentation article articles bois boisson boissons boutique café carburant chaussures commerce denrée
+électricité emballage énergie épicerie équipement essence fourniture gaz huile lait légumes livraison magasin
+marchandise marchandises matériau matériaux matière matières meuble meubles métal mobilier outil outillage pain
+papier pièce pièces plastique produit produits restaurant tissu vêtement vêtements viande vin
+
+# --- Family and civil status (generic words, the rules keep their own role handling) ---
+adulte aîné aînée ancêtre bébé cadet cadette célibataire conjoint conjointe cousin cousine divorce divorcé
+divorcée époux épouse famille fiancé fiancée grand-mère grand-père jumeau jumelle mariage marié mariée neveu
+nièce nourrisson orphelin orpheline parent parents retraité retraitée veuf veuve

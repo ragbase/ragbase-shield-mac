@@ -1,0 +1,41 @@
+# RAGbase Shield financial instrument terms. Written for RAGbase Shield, Apache-2.0.
+# Acronyms of securities and funds (convertible bonds, warrants, preferred shares...). Written in capitals
+# they are never a first name or a name word, even when the same letters form a first name (R1, CL-19).
+ORANE
+ORNANE
+OCEANE
+OCA
+OC
+ORA
+OBSA
+OBSAR
+ABSA
+BSA
+BSAR
+BSAAR
+BSPCE
+BSAPCE
+ADP
+AGA
+AGAP
+TSDI
+TSS
+TSR
+TSDD
+TSSDI
+CCA
+ETF
+OPCVM
+FCP
+FCPI
+FCPR
+FPCI
+FIP
+SICAV
+SICAF
+SCPI
+OPCI
+OAT
+EMTN
+NEU
+CP

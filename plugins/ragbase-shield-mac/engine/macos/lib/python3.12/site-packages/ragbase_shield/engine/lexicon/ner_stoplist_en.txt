@@ -1,0 +1,338 @@
+# RAGbase Shield NER stop list (English). Written for RAGbase Shield, Apache-2.0.
+# Words and phrases that an NER span may never be made of alone: document and role nouns, defined contract
+# terms, chat and e-mail words, closings. Matching is case insensitive. A multi-word entry is a phrase: a span
+# equal to it is dropped, a span that starts with it loses the phrase.
+# Do not add words that can be the distinctive part of a person or company name.
+
+# --- Document, chat and e-mail words ---
+subject
+reference
+ref
+re
+fwd
+fw
+attachment
+attachments
+attached
+file
+files
+document
+documents
+report
+reports
+memo
+note
+notes
+summary
+agenda
+minutes
+draft
+version
+proposal
+offer
+quote
+invoice
+order
+purchase order
+receipt
+statement
+certificate
+form
+template
+list
+inventory
+schedule
+calendar
+timeline
+roadmap
+update
+updates
+status
+ticket
+tickets
+issue
+issues
+request
+requests
+reminder
+notice
+announcement
+newsletter
+thread
+channel
+message
+messages
+reply
+meeting
+call
+sync
+standup
+review
+feedback
+comment
+comments
+question
+questions
+answer
+answers
+todo
+to-do
+task
+tasks
+action items
+next steps
+
+# --- Roles, functions and defined contract terms ---
+party
+parties
+client
+clients
+customer
+customers
+supplier
+suppliers
+vendor
+vendors
+provider
+contractor
+subcontractor
+distributor
+licensor
+licensee
+franchisor
+franchisee
+lessor
+lessee
+landlord
+tenant
+buyer
+seller
+purchaser
+borrower
+lender
+guarantor
+agent
+broker
+insurer
+insured
+beneficiary
+employer
+employee
+employees
+staff
+contractor
+consultant
+intern
+user
+users
+member
+members
+subscriber
+shareholder
+shareholders
+stakeholder
+stakeholders
+partner
+partners
+director
+directors
+officer
+officers
+manager
+managers
+supervisor
+lead
+leads
+owner
+founder
+chairman
+chairwoman
+chair
+president
+vice president
+secretary
+treasurer
+team
+teams
+territory
+products
+product
+services
+service
+agreement
+contract
+amendment
+addendum
+appendix
+exhibit
+schedule
+term
+terms
+effective date
+signature
+signatory
+company
+corporation
+group
+business
+firm
+enterprise
+organization
+organisation
+office
+headquarters
+branch
+subsidiary
+affiliate
+department
+division
+unit
+board
+committee
+council
+commission
+court
+tribunal
+judge
+judges
+counsel
+attorney
+solicitor
+barrister
+clerk
+registrar
+expert
+mediator
+arbitrator
+trustee
+receiver
+liquidator
+administrator
+building
+property
+premises
+unit
+suite
+floor
+plot
+estate
+
+# --- Greetings, closings, chat words ---
+hi
+hello
+hey
+dear
+sir
+madam
+thanks
+thank you
+regards
+best
+cheers
+sincerely
+yours
+cc
+bcc
+attn
+fyi
+asap
+eod
+ok
+okay
+yes
+no
+sender
+recipient
+recipients
+from
+to
+sent
+forwarded
+replied
+
+# --- Phrases: statutory roles and bodies (never a name; cut from the start of a longer span) ---
+chief executive officer
+chief financial officer
+chief technology officer
+chief operating officer
+managing director
+general counsel
+legal counsel
+in-house counsel
+head of legal
+head of sales
+head of marketing
+head of finance
+head of hr
+head of people
+vice president of sales
+vice president of engineering
+board of directors
+executive committee
+audit committee
+human resources
+human resources department
+legal department
+finance department
+sales team
+marketing team
+support team
+engineering team
+customer support
+customer success
+account manager
+account management
+project manager
+product manager
+office manager
+general manager
+sales manager
+store manager
+team lead
+tech lead
+data protection officer
+supreme court
+high court
+court of appeal
+court of appeals
+district court
+circuit court
+crown court
+county court
+magistrates' court
+family court
+employment tribunal
+small claims court
+attorney general
+district attorney
+public prosecutor
+justice of the peace
+registrar of companies
+companies house
+limited liability company
+limited liability partnership
+public limited company
+private limited company
+joint venture
+holding company
+parent company
+sole proprietorship
+general partnership
+limited partnership
+non-profit organization
+non-profit organisation
+charitable trust
+effective date
+governing law
+force majeure
+intellectual property
+personal data
+confidential information
+trade secret
+trade secrets
+terms and conditions
+terms of service
+privacy policy
+non-disclosure agreement
+statement of work
+purchase order

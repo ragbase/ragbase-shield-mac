@@ -1,0 +1,22 @@
+#!/bin/sh
+# RAGbase Shield: starts the local engine of this plugin on macOS (universal: Intel and Apple silicon).
+# The plugin's .mcp.json runs it as "/bin/sh <this file>", so this file needs no execute bit.
+# Everything it needs is inside this folder. It downloads nothing and uses no network.
+# The environment is emptied: no variable of Claude, of a settings file or of the session reaches the engine.
+case "$0" in
+  */*) here=${0%/*} ;;
+  *) here=. ;;
+esac
+# The interpreter file is named "RAGbase Shield": macOS shows this name when it asks the user for
+# access to a folder.
+py="$here/macos/bin/RAGbase Shield"
+# An install path that drops the execute bit would stop Python here: put it back (the plugin copy belongs to the
+# user). If that is not possible, say so in plain French and stop at once (no message of the lawyer is blocked).
+if [ ! -x "$py" ]; then
+  /bin/chmod u+x "$py" 2>/dev/null
+fi
+if [ ! -x "$py" ]; then
+  echo "RAGbase Shield ne peut pas démarrer : réinstallez le plugin." >&2
+  exit 1
+fi
+exec /usr/bin/env -i PATH=/usr/bin:/bin LANG=fr_FR.UTF-8 "$py" "$@"

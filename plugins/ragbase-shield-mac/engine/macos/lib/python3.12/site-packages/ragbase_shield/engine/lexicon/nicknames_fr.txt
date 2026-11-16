@@ -1,0 +1,17 @@
+# RAGbase Shield nicknames (French). Written for RAGbase Shield, Apache-2.0.
+# Standard diminutives that are not a prefix of the full first name, one "short = full" pair per line.
+# A registered person's first name gives its diminutives as first-name variants (R1, CL-03). Prefix
+# diminutives ("Steph" of "Stéphanie") need no entry: names.py derives them.
+babette = élisabeth
+lisette = élisabeth
+zabeth = élisabeth
+mimi = michèle
+bébert = albert
+jojo = joseph
+fanfan = françoise
+loulou = louise
+coco = colette
+dédé = andré
+nanou = annick
+pierrot = pierre
+jeannot = jean
