@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "RAGbase Shield pour l'application Claude, version Mac.",
-    "version": "0.4.2"
+    "version": "0.4.3"
   },
   "plugins": [
     {
       "name": "ragbase-shield-mac",
       "source": "./plugins/ragbase-shield-mac",
       "description": "Pour les avocats : Claude travaille sur vos dossiers clients sans voir les vrais noms. Ils restent sur votre Mac et reviennent dans le document final.",
-      "version": "0.4.2",
+      "version": "0.4.3",
       "author": {
         "name": "RAGbase"
       },

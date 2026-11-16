@@ -37,7 +37,7 @@ from contextlib import contextmanager, nullcontext
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Iterator, Optional
+from typing import Any, Callable, Iterator, Optional
 
 from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.primitives import hashes
@@ -1398,8 +1398,12 @@ class Registry:
     _ROW = "SELECT num, uuid, folder_enc, title_enc, locale, key_enc, created FROM dossiers"
 
     # public API
-    def add_dossier(self, folder: os.PathLike | str, title: Optional[str] = None) -> Dossier:
-        """Register a folder as a dossier (returns DOSSIER_n). Registering the same folder again returns it."""
+    def add_dossier(self, folder: os.PathLike | str, title: Optional[str] = None,
+                    on_create: Optional[Callable[[str, str], None]] = None) -> Dossier:
+        """Register a folder as a dossier (returns DOSSIER_n). Registering the same folder again returns it.
+
+        v0.4.3: ``on_create(code, uuid)`` runs inside the write transaction of a NEW dossier, before the row is
+        committed (the plugin writes its "not read yet" mark there). If it raises, nothing is registered."""
         path = Path(folder).expanduser()
         try:
             path = path.resolve(strict=True)
@@ -1408,7 +1412,7 @@ class Registry:
         if not path.is_dir():
             raise VaultError("Ce chemin n'est pas un dossier (not a folder)")
         name = " ".join((title if title is not None else path.name).split()) or path.name
-        d, created = self._create(path, name, config.locale(), reuse=True)
+        d, created = self._create(path, name, config.locale(), reuse=True, on_create=on_create)
         if created:
             self.journal("dossier_added", dossier=d.code)
         return d
@@ -1416,7 +1420,8 @@ class Registry:
     def _folder_registered(self, path: Path) -> bool:
         return bool(self._db.query("SELECT 1 FROM dossiers WHERE folder_mac=?", (self._mac(_folder_key(path)),)))
 
-    def _create(self, folder: Path, title: str, locale: str, reuse: bool) -> tuple[Dossier, bool]:
+    def _create(self, folder: Path, title: str, locale: str, reuse: bool,
+                on_create: Optional[Callable[[str, str], None]] = None) -> tuple[Dossier, bool]:
         """Insert a dossier row and its empty vault. The folder check runs inside the write transaction, so
         two threads or processes cannot register the same folder twice. Returns (dossier, created)."""
         with self._lock:
@@ -1432,6 +1437,8 @@ class Registry:
                         (duuid, folder_mac, self._enc(str(folder)), self._enc(title), locale,
                          self._enc(data_key.decode("ascii")), time.time()))
                     num = cur.lastrowid
+                    if on_create is not None:
+                        on_create(f"DOSSIER_{num}", duuid)  # raises: the transaction is rolled back
             if row is not None:
                 if not reuse:
                     raise VaultError("Ce dossier est déjà enregistré (folder already registered)")

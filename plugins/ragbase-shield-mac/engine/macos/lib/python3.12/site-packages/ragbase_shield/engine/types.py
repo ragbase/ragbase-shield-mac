@@ -61,6 +61,27 @@ CODE_RE = re.compile(
     r")(?![A-Za-z0-9_])"
 )
 
+#: F0 (0.4.3): a registered value is WEAK when, once spaces and punctuation are removed, it has fewer than
+#: ``WEAK_MIN_CHARS`` characters, or only digits and fewer than ``WEAK_MIN_DIGITS`` of them ("4", "13", "35000",
+#: "A", "Li", "3M"). A weak value stays masked where its detector found it, but it is never spread: never searched
+#: for in other places (dictionary pass of the masker), never used by the last check, never made into an entity of
+#: another dossier. The rule reads the value only, so it also holds for the values already in a vault.
+WEAK_MIN_CHARS = 3
+WEAK_MIN_DIGITS = 6
+_WEAK_STRIP_RE = re.compile(r"[\W_]+")
+
+
+def is_weak_value(value: object) -> bool:
+    """True for a registered value too short to be searched for safely (see ``WEAK_MIN_CHARS``)."""
+    body = _WEAK_STRIP_RE.sub("", str(value or ""))
+    return len(body) < WEAK_MIN_CHARS or (body.isdigit() and len(body) < WEAK_MIN_DIGITS)
+
+
+def spreadable(ents) -> list:
+    """The entities whose values may be searched for outside the place where they were found (F0: the weak values
+    are left out). THE one list of known values for the dictionary pass and the last check."""
+    return [e for e in ents if not is_weak_value(e.value)]
+
 
 @dataclass(frozen=True)
 class Entity:

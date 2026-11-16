@@ -1,4 +1,4 @@
-THIRD-PARTY LICENCES: RAGbase Shield plugin for Claude (Mac), version 0.4.2
+THIRD-PARTY LICENCES: RAGbase Shield plugin for Claude (Mac), version 0.4.3
 
 RAGbase Shield itself is under the Apache License 2.0 (files LICENSE and NOTICE).
 This plugin also bundles a Python runtime and the Python packages below. Each one keeps its own licence.
@@ -13,7 +13,7 @@ PART 1. COMPONENTS
 
 Runtime: Python 3.12.15 for macOS, universal (Intel x86_64 + Apple silicon arm64)
   Source: python-build-standalone release 20261021 (Astral), cpython-3.12.15+20261021-{x86_64,aarch64}-apple-darwin-install_only_stripped.tar.gz, https://github.com/astral-sh/python-build-standalone/releases/tag/20261021
-  In the plugin: engine/macos/bin/RAGbase Shield (the Python interpreter, under the product's file name), engine/macos/lib/ (standard library in python312.zip)
+  In the plugin: engine/macos/bin/RAGbase Shield (the Python interpreter, under the product's file name), engine/macos/lib/ (standard library compiled in engine/macos/lib/python3.12/)
   Parts of the runtime:
     - CPython 3.12.15: PSF-2.0 (https://www.python.org/downloads/release/python-31215/)
     - OpenSSL 3 (_ssl, _hashlib): Apache-2.0 (https://www.openssl.org/)

@@ -748,6 +748,7 @@ _GESTION_RE = re.compile(r"(?i)(?:num[ée]ro|n[°ºo]\.?)\s+de\s+gestion\s*:?\s*
 _TOQUE_RE = re.compile(
     r"(?:(?i:\btoque)\s*(?:n[°ºo]\.?\s*)?:?\s*|\(\s*T\.?\s?)(?P<v>[A-Z]?[ \u00a0]?\d{1,5})(?![0-9])"
 )
+_TOQUE_CLOSE_RE = re.compile(r"[ \u00a0]*\)")
 
 
 def _mask_toque() -> bool:
@@ -763,8 +764,12 @@ def _find_id_code(text: str) -> Iterator[Candidate]:
             v = m.group("v")
             if rx is _VERIF_RE and (not any(c.isdigit() for c in v) or not any(c.isalpha() for c in v)):
                 continue
-            if rx is _TOQUE_RE and re.match(r"\(\s*T\.?\d{1,2}\)", text[m.start():m.end() + 1]):
-                continue  # "(T4)": a parenthesised short token (a quarter, a column), not a toque (v0.2, Max class C)
+            if rx is _TOQUE_RE and text[m.start()] == "(" and not v[:1].isalpha() \
+                    and (len(v.strip()) < 3 or not _TOQUE_CLOSE_RE.match(text, m.end("v"))):
+                # F0 (0.4.3): "(T4)", "(T. 4)", "(T 13)", "(T. 2, ligne 20)": a tome, a table, a quarter, never a
+                # toque. With no "toque" word, a toque made of digits only is "(T 1234)": three digits or more and
+                # nothing else in the brackets. These short numbers were stored as identifiers (v0.2, Max class C)
+                continue
             yield Candidate(m.start("v"), m.end("v"), "ID_CODE", True, pr, "kbis_court")
     for m in _ISIN_RE.finditer(text):
         v = m.group()

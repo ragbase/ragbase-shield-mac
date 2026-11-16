@@ -18,12 +18,12 @@ Gratuit et open source. Rien d'autre à installer.
 
 Il vous faut l'application Claude pour Mac.
 
-- **Le plus simple :** sur [shield.ragbase.ai](https://shield.ragbase.ai), cliquez sur le bouton pour Mac. L'application Claude s'ouvre. Cliquez sur **Add** à droite de « RAGbase Shield (Mac) ».
-- **Autre façon :** dans l'application Claude, ouvrez **Customize > Plugins > Add > Add marketplace > Add from a repository**. Écrivez `ragbase/ragbase-shield-mac` et validez. Dans l'onglet **Discover**, cliquez ensuite sur **Add** à droite de « RAGbase Shield (Mac) ».
+- **Le plus simple :** sur [shield.ragbase.ai](https://shield.ragbase.ai), cliquez sur le bouton pour Mac. L'application Claude s'ouvre : cliquez sur **Synchro**, puis sur **Ajouter** à droite de « RAGbase Shield (Mac) ». Si votre Claude est en anglais, ces boutons s'appellent **Sync** et **Add**.
+- **Autre façon :** dans l'application Claude, ouvrez **Personnalisation > Plug-ins > Ajouter > Ajouter une marketplace > Ajouter depuis un dépôt**. Écrivez `ragbase/ragbase-shield-mac` et cliquez sur **Synchro**. Dans l'onglet **Découvrir**, cliquez ensuite sur **Ajouter** à droite de « RAGbase Shield (Mac) ». Si votre Claude est en anglais : **Customize > Plugins > Add > Add marketplace > Add from a repository**, puis **Sync**, **Discover** et **Add**.
 
 ### Utiliser Shield en 3 étapes
 
-1. Dans une conversation, écrivez : « Protège un dossier avec Shield ». Une fenêtre de votre Mac s'ouvre : choisissez le dossier du client. Claude reçoit seulement un code, par exemple `DOSSIER_1`. La première fois, votre Mac peut vous demander d'autoriser l'accès au dossier : cliquez sur **Autoriser**.
+1. Dans une conversation, écrivez : « Protège un dossier avec Shield ». Une fenêtre RAGbase Shield s'ouvre par-dessus Claude : cliquez dedans et choisissez le dossier d'un seul client (2 000 fichiers ou 2 Go au plus). Shield lit le dossier sur votre Mac : pour un gros dossier, cette première lecture prend quelques minutes et Claude vous dit où elle en est. Claude reçoit seulement un code, par exemple `DOSSIER_1`. La première fois, votre Mac peut vous demander d'autoriser l'accès au dossier : cliquez sur **Autoriser**.
 2. Demandez votre travail, par exemple : « Fais une synthèse du dossier » ou « Rédige une mise en demeure ». Claude lit les documents avec les codes.
 3. Écrivez : « Enregistre le document final avec Shield ». Shield remet les vrais noms sur votre Mac. Le document est dans le dossier « Shield - sorties » de votre dossier client.
 
@@ -62,12 +62,12 @@ Free and open source. Nothing else to install.
 
 You need the Claude app for Mac.
 
-- **Easiest:** on [shield.ragbase.ai](https://shield.ragbase.ai), click the button for Mac. The Claude app opens. Click **Add** next to "RAGbase Shield (Mac)".
-- **Other way:** in the Claude app, open **Customize > Plugins > Add > Add marketplace > Add from a repository**. Type `ragbase/ragbase-shield-mac` and confirm. Then, in the **Discover** tab, click **Add** next to "RAGbase Shield (Mac)".
+- **Easiest:** on [shield.ragbase.ai](https://shield.ragbase.ai), click the button for Mac. The Claude app opens: click **Sync**, then **Add** next to "RAGbase Shield (Mac)".
+- **Other way:** in the Claude app, open **Customize > Plugins > Add > Add marketplace > Add from a repository**. Type `ragbase/ragbase-shield-mac` and click **Sync**. Then, in the **Discover** tab, click **Add** next to "RAGbase Shield (Mac)".
 
 ### Use Shield in 3 steps
 
-1. In a conversation, write: "Protège un dossier avec Shield" (or "Protect a folder with Shield"). A window of your Mac opens: choose the client folder. Claude only gets a code, for example `DOSSIER_1`. The first time, your Mac may ask you to allow access to the folder: click **Allow**.
+1. In a conversation, write: "Protège un dossier avec Shield" (or "Protect a folder with Shield"). A RAGbase Shield window opens on top of Claude: click in it and choose the folder of one client (2,000 files or 2 GB at most). Shield reads the folder on your Mac: for a large folder this first reading takes some minutes, and Claude tells you where it is. Claude only gets a code, for example `DOSSIER_1`. The first time, your Mac may ask you to allow access to the folder: click **Allow**.
 2. Ask for your work, for example: "Summarise the file" or "Draft a formal notice". Claude reads the documents with the codes.
 3. Write: "Save the final document with Shield". Shield puts the real names back on your Mac. The document is in the "Shield - sorties" folder of your client folder.
 
@@ -94,9 +94,9 @@ Your client folders and the documents in "Shield - sorties" stay where they are.
 
 ## Technical details
 
-- **Engine source:** [github.com/ragbase/ragbase-shield](https://github.com/ragbase/ragbase-shield), branch `plugin-claude-tab`, commit `03bd4816f0c32ddd6359cf39add300628c4c3d9a`. The plugin runs the module `ragbase_shield.claude_tab` (RAGbase Shield 0.4.2): seven MCP tools in French, detection rules only (no model).
+- **Engine source:** [github.com/ragbase/ragbase-shield](https://github.com/ragbase/ragbase-shield), branch `plugin-claude-tab`, commit `fcde0ac5f4fae092d4392b2651ac56bedab3cfc3`. The plugin runs the module `ragbase_shield.claude_tab` (RAGbase Shield 0.4.3): seven MCP tools in French, detection rules only (no model).
 - **Start:** `.mcp.json` runs `/bin/sh ${CLAUDE_PLUGIN_ROOT}/engine/shield` (no execute bit needed). The script starts the bundled Python with an empty environment (`env -i`) and `-I -B`.
-- **Runtime:** Python 3.12.15, universal (Intel and Apple silicon), from python-build-standalone release 20261021 (PSF-2.0), in `engine/macos/`. The standard library is compiled in `engine/macos/lib/python312.zip`. The interpreter file is `engine/macos/bin/RAGbase Shield` (Python under the product's name: macOS shows this name when it asks for access to a folder).
+- **Runtime:** Python 3.12.15, universal (Intel and Apple silicon), from python-build-standalone release 20261021 (PSF-2.0), in `engine/macos/`. The standard library is compiled (sourceless `.pyc` files) in `engine/macos/lib/python3.12/`. The interpreter file is `engine/macos/bin/RAGbase Shield` (Python under the product's name: macOS shows this name when it asks for access to a folder).
 - **No network:** nothing is downloaded at install or at run time, and the engine opens no network connection. The Mac build is tested with every network access denied by the system.
 - **No hooks:** the plugin has no hooks. It can never block or change a message you send to Claude.
 - **Integrity:** `SHA256SUMS` at the root of this repository gives the SHA-256 of every file of `plugins/ragbase-shield-mac/`. Check with `shasum -a 256 -c SHA256SUMS` (Mac) or `Get-FileHash` (Windows).

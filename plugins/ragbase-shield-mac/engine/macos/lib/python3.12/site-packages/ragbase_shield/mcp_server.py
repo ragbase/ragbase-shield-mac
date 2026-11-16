@@ -90,10 +90,44 @@ def _fail(exc: BaseException) -> ToolError:
 
 
 def _out(text: str, dossier: Optional[str] = None) -> str:
-    """Last canary on the whole tool result before it leaves this process. ``dossier``: the dossier the result
-    belongs to (its values keep their codes, values of other dossiers get new codes of it: R1 CL-26)."""
+    """Last canary on a whole text before it leaves this process. ``dossier``: the dossier the text belongs to (its
+    values keep their codes, values of other dossiers get new codes of it: R1 CL-26).
+
+    F0 (0.4.3): the tools no longer use it on a whole answer: they build the answer with :func:`_answer`, so that
+    Shield's own words, codes and counts never go through the last check."""
     with service.output_dossier(dossier):
         return service.default().guard_output(text)
+
+
+class Content(str):
+    """F0 (0.4.3): a part of a tool answer that comes from a document or from a person (file name, folder name,
+    passage of text, search result, title, a code the model wrote). Only these parts go through the last check."""
+
+    __slots__ = ()
+
+
+def _answer(parts: list, dossier: Optional[str] = None) -> str:
+    """F0 (0.4.3): a tool answer built from parts. The :class:`Content` parts go through the last check (one pass
+    for all of them); every other part is Shield's own frame (fixed words, codes, counts, sizes) and is never
+    changed: a registered value of a dossier ("4") can no longer turn "DOSSIER_4" or a count into a code."""
+    out = [str(x) for x in parts]
+    where = [i for i, x in enumerate(parts) if isinstance(x, Content)]
+    if where:
+        with service.output_dossier(dossier):
+            checked = service.default().guard_parts([out[i] for i in where])
+        for i, text in zip(where, checked):
+            out[i] = text
+    return "".join(out)
+
+
+def _lines(rows: list[list]) -> list:
+    """Parts of several lines (each line a list of parts), joined by line breaks."""
+    out: list = []
+    for k, row in enumerate(rows):
+        if k:
+            out.append("\n")
+        out.extend(row)
+    return out
 
 
 # ------------------------------------------------------------------------------------------ dossier scope
@@ -153,6 +187,21 @@ def _scoped(dossier: str) -> str:
     return dossier
 
 
+def _model_items(r: dict, dossier: Optional[str]) -> tuple[list[str], list[str], list[str]]:
+    """F0 (0.4.3): the codes, marks and ids that the model wrote in a draft (``unknown_codes``, ``placeholders``,
+    ``shield_ids`` of a save report), each one checked as content; Shield's own words around them are not."""
+    groups = [list(r.get("unknown_codes") or []), list(r.get("placeholders") or []), list(r.get("shield_ids") or [])]
+    flat = [str(x) for g in groups for x in g]
+    if flat:
+        with service.output_dossier(dossier):
+            flat = service.default().guard_parts(flat)
+    out, k = [], 0
+    for g in groups:
+        out.append(flat[k:k + len(g)])
+        k += len(g)
+    return out[0], out[1], out[2]
+
+
 def _placeholder_note(placeholders: list[str], shield_ids: list[str]) -> str:
     """Lines of the save message about what could not be restored (R1 CL-31, CL-36). Generic marks and codes."""
     lines = []
@@ -178,15 +227,16 @@ def shield_list_dossiers() -> str:
     Never shows real dossier titles. Liste les dossiers clients par code."""
     try:
         rows = service.list_dossiers()
+        # F0 (0.4.3): codes, counts and fixed words only: Shield's own frame, never changed by the last check
         if not rows:
-            return _out("Aucun dossier enregistré. L'utilisateur doit d'abord connecter un dossier dans Shield Desk "
-                        "ou avec « ragbase-shield add <dossier> ». (No dossier registered yet.)")
+            return ("Aucun dossier enregistré. L'utilisateur doit d'abord connecter un dossier dans Shield Desk "
+                    "ou avec « ragbase-shield add <dossier> ». (No dossier registered yet.)")
         pinned = _SCOPE.pinned
         if pinned is not None:
             rows = [r for r in rows if r.get("code") == pinned]
             if not rows:
-                return _out(f"Cette session RAGbase Shield est limitée à {pinned}, qui n'existe plus. L'utilisateur "
-                            "ouvre une nouvelle session. (Pinned dossier no longer registered.)")
+                return (f"Cette session RAGbase Shield est limitée à {pinned}, qui n'existe plus. L'utilisateur "
+                        "ouvre une nouvelle session. (Pinned dossier no longer registered.)")
         lines = [f"{len(rows)} dossier(s) RAGbase Shield (codes uniquement) :"]
         for r in rows:
             if r.get("error"):
@@ -199,7 +249,7 @@ def shield_list_dossiers() -> str:
             lines.append("Cette session se limitera au premier dossier ouvert (un dossier par session). "
                          "(This session will be pinned to the first dossier it opens.)")
         lines.append("Suite : shield_list_documents avec le code du dossier.")
-        return _out("\n".join(lines))
+        return "\n".join(lines)
     except Exception as exc:  # noqa: BLE001
         raise _fail(exc) from None
 
@@ -212,8 +262,8 @@ def shield_list_documents(dossier: DossierArg) -> str:
         _SCOPE.used(dossier)
         code = dossier.strip().upper()
         if not docs:
-            return _out(f"{code} : aucun document lisible (formats : pdf, docx, txt, md, eml, html).", code)
-        lines = [f"{code} : {len(docs)} document(s). Format : id | type | taille | nom masqué"]
+            return f"{code} : aucun document lisible (formats : pdf, docx, txt, md, eml, html)."
+        lines: list[list] = [[f"{code} : {len(docs)} document(s). Format : id | type | taille | nom masqué"]]
         unsupported = 0
         for d in docs:
             size = _kb(d["size"])
@@ -221,13 +271,13 @@ def shield_list_documents(dossier: DossierArg) -> str:
                 size += f", {d['pages']} page(s)"
             if d["kind"] == UNSUPPORTED_KIND:
                 unsupported += 1
-            lines.append(f"{d['id']} | {d['kind']} | {size} | {d['masked_path']}")
+            lines.append([f"{d['id']} | {d['kind']} | {size} | ", Content(d["masked_path"])])
         if unsupported:
-            lines.append(f"{unsupported} fichier(s) « {UNSUPPORTED_KIND} » (tableur, image...) : Shield ne peut pas "
-                         "les lire. Demandez à l'utilisateur une copie en PDF, Word ou texte si leur contenu compte. "
-                         "(Unsupported files are listed but cannot be read.)")
-        lines.append("Suite : shield_read_document(dossier, document) ou shield_search(dossier, query).")
-        return _out("\n".join(lines), code)
+            lines.append([f"{unsupported} fichier(s) « {UNSUPPORTED_KIND} » (tableur, image...) : Shield ne peut pas "
+                          "les lire. Demandez à l'utilisateur une copie en PDF, Word ou texte si leur contenu compte. "
+                          "(Unsupported files are listed but cannot be read.)"])
+        lines.append(["Suite : shield_read_document(dossier, document) ou shield_search(dossier, query)."])
+        return _answer(_lines(lines), code)
     except Exception as exc:  # noqa: BLE001
         raise _fail(exc) from None
 
@@ -250,17 +300,17 @@ def shield_read_document(
         _SCOPE.used(dossier)
         code = dossier.strip().upper()
         if r["needs_ocr"]:
-            return _out(f"{code} / {r['id']} : PDF sans couche texte (document scanné). Pas d'OCR en v0.1 : "
-                        "ce document ne peut pas être lu. Demandez à l'utilisateur une version texte. "
-                        "(Scanned PDF without a text layer: no OCR in v0.1.)", code)
+            return (f"{code} / {r['id']} : PDF sans couche texte (document scanné). Pas d'OCR en v0.1 : "
+                    "ce document ne peut pas être lu. Demandez à l'utilisateur une version texte. "
+                    "(Scanned PDF without a text layer: no OCR in v0.1.)")
         end = r["start"] + len(r["text"])
         head = f"[{code} / {r['id']} · caractères {r['start']}-{end} sur {r['total_chars']}"
         if r.get("pages"):
             head += f" · {r['pages']} page(s) PDF"
         head += f" · suite : start={r['next']}]" if r["next"] is not None else " · fin du document]"
         if r.get("warnings"):
-            head += "\n[avertissements : " + ", ".join(r["warnings"]) + "]"
-        return _out(head + "\n" + r["text"], code)
+            head += "\n[avertissements : " + ", ".join(r["warnings"]) + "]"  # short codes of the reader
+        return _answer([head + "\n", Content(r["text"])], code)
     except Exception as exc:  # noqa: BLE001
         raise _fail(exc) from None
 
@@ -277,11 +327,12 @@ def shield_search(
         _SCOPE.used(dossier)
         code = dossier.strip().upper()
         if not hits:
-            return _out(f"{code} : aucun résultat. (No result.)", code)
-        lines = [f"{code} : {len(hits)} résultat(s). Pour lire la suite : shield_read_document avec start."]
+            return f"{code} : aucun résultat. (No result.)"
+        lines: list[list] = [[f"{code} : {len(hits)} résultat(s). Pour lire la suite : shield_read_document avec "
+                              "start."]]
         for i, h in enumerate(hits, 1):
-            lines.append(f"{i}. {h['document']} (start={h['offset']}) : {h['snippet']}")
-        return _out("\n".join(lines), code)
+            lines.append([f"{i}. {h['document']} (start={h['offset']}) : ", Content(h["snippet"])])
+        return _answer(_lines(lines), code)
     except Exception as exc:  # noqa: BLE001
         raise _fail(exc) from None
 
@@ -300,17 +351,18 @@ def shield_save_draft(
         r = service.save_draft_report(_scoped(dossier), title, content, format)
         _SCOPE.used(dossier)
         code = dossier.strip().upper()
+        unknown, placeholders, ids = _model_items(r, code)
         msg = (f"Enregistré : {r['id']} ({_kb(r['bytes'])}, {r['format']}) dans le dossier « Shield - sorties » "
                f"de {code}. Les vrais noms sont restaurés uniquement sur l'ordinateur de l'utilisateur. "
                "Dites à l'utilisateur d'ouvrir ce fichier sur son ordinateur. "
                f"(Saved {r['id']}; the restored file is in the 'Shield - sorties' folder of {code}.)")
-        if r["unknown_codes"]:
+        if unknown:
             msg += ("\nCodes inconnus de ce dossier, laissés tels quels (unknown codes, not restored) : "
-                    + ", ".join(r["unknown_codes"]))
-        note = _placeholder_note(list(r.get("placeholders") or []), list(r.get("shield_ids") or []))
+                    + ", ".join(unknown))
+        note = _placeholder_note(placeholders, ids)
         if note:
             msg += "\n" + note
-        return _out(msg, code)
+        return msg
     except Exception as exc:  # noqa: BLE001
         raise _fail(exc) from None
 
@@ -322,7 +374,7 @@ def shield_status() -> str:
         lines = [f"RAGbase Shield {s['version']} · détection : {s['engine_mode']} · codes : {s['locale']} · "
                  f"{s['dossiers']} dossier(s) · aucun appel réseau.", "Limites :"]
         lines += [f"- {fr} ({en})" for fr, en in LIMITS]
-        return _out("\n".join(lines))
+        return "\n".join(lines)  # F0 (0.4.3): Shield's own frame only
     except Exception as exc:  # noqa: BLE001
         raise _fail(exc) from None
 

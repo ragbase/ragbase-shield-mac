@@ -4437,7 +4437,9 @@ def _org_variants_impl(value: str) -> list[Variant]:
 _TITLE_SPLIT_RE = re.compile(r"\s+(?:c\.|C\.|c/|C/|contre|Contre|CONTRE|v\.|V\.|vs\.?|VS\.?|/)\s+")
 _PARTY_SPLIT_RE = re.compile(r"\s*[,;]\s*|\s+et\s+(?=(?:M\.|Mme|Mlle|Me|Monsieur|Madame|la soci[ée]t[ée]|Soci[ée]t[ée])\b)")
 _PARTY_ET_RE = re.compile(r"\s+et\s+")
-_OTHERS_RE = re.compile(r"(?i)\s*(?:,|et|&)?\s*(?:autres|consorts|cts|al\.?|a\.)\s*$")
+# v0.4.3 (fix): "et al." / "et autres" / ", consorts" at the end of a party, as whole words only. The 0.4.0 pattern
+# had no word boundary, so the "al" at the end of a name was cut ("Duval" -> "Duv") and the real name stayed clear.
+_OTHERS_RE = re.compile(r"(?i)(?:\s*[,&]\s*|\s+(?:et\s+)?|^)\b(?:autres|consorts|cts|al\.?|a\.)(?:\s*$)")
 
 
 # Words that describe a dossier rather than name a party ("Dossier X", "X - constat", "Contentieux prud'homal X").
