@@ -77,10 +77,27 @@ def is_weak_value(value: object) -> bool:
     return len(body) < WEAK_MIN_CHARS or (body.isdigit() and len(body) < WEAK_MIN_DIGITS)
 
 
+#: 0.4.4 (birth place fix): kinds whose values are NEVER spread, whatever the value. A place of birth is a town:
+#: masked where the text says it is a place of birth (the detector reads "né le ... à Lyon", "Lieu de naissance :
+#: Lyon"), but the same town elsewhere is legal text ("cour d'appel de Lyon", "Fait à Lyon", "notaire à Crest") and
+#: stays in clear. In 0.4.2 and 0.4.3 the value spread like a name. The rule reads the kind only, so it also holds
+#: for the values already in a vault.
+NEVER_SPREAD_KINDS = frozenset({"BIRTHPLACE"})
+
+
+def spreads(kind: str, value: object) -> bool:
+    """THE spread rule: True when a registered value of ``kind`` may be searched for outside the place where its
+    detector found it (dictionary pass of the masker, pending finds of a text, last check, labels of file names,
+    values made into entities of another dossier). False for a kind of ``NEVER_SPREAD_KINDS`` and for a weak
+    value (F0)."""
+    return kind not in NEVER_SPREAD_KINDS and not is_weak_value(value)
+
+
 def spreadable(ents) -> list:
     """The entities whose values may be searched for outside the place where they were found (F0: the weak values
-    are left out). THE one list of known values for the dictionary pass and the last check."""
-    return [e for e in ents if not is_weak_value(e.value)]
+    are left out; 0.4.4: the kinds of ``NEVER_SPREAD_KINDS`` too). THE one list of known values for the dictionary
+    pass and the last check."""
+    return [e for e in ents if spreads(e.kind, e.value)]
 
 
 @dataclass(frozen=True)

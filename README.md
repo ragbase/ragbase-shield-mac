@@ -18,8 +18,8 @@ Gratuit et open source. Rien d'autre à installer.
 
 Il vous faut l'application Claude pour Mac.
 
-- **Le plus simple :** sur [shield.ragbase.ai](https://shield.ragbase.ai), cliquez sur le bouton pour Mac. L'application Claude s'ouvre : cliquez sur **Synchro**, puis sur **Ajouter** à droite de « RAGbase Shield (Mac) ». Si votre Claude est en anglais, ces boutons s'appellent **Sync** et **Add**.
-- **Autre façon :** dans l'application Claude, ouvrez **Personnalisation > Plug-ins > Ajouter > Ajouter une marketplace > Ajouter depuis un dépôt**. Écrivez `ragbase/ragbase-shield-mac` et cliquez sur **Synchro**. Dans l'onglet **Découvrir**, cliquez ensuite sur **Ajouter** à droite de « RAGbase Shield (Mac) ». Si votre Claude est en anglais : **Customize > Plugins > Add > Add marketplace > Add from a repository**, puis **Sync**, **Discover** et **Add**.
+- **Le plus simple :** sur [shield.ragbase.ai](https://shield.ragbase.ai), cliquez sur le bouton pour Mac. L'application Claude s'ouvre : cliquez sur **Synchro**, puis sur **Ajouter** à droite de « RAGbase Shield (Mac) », puis sur **Continuer** dans la fenêtre qui s'ouvre (Claude vous prévient que Shield est un programme qui tourne sur votre ordinateur : c'est normal). Si votre Claude est en anglais, ces boutons s'appellent **Sync**, **Add** et **Continue**.
+- **Autre façon :** dans l'application Claude, ouvrez **Personnalisation > Plug-ins > Ajouter > Ajouter une marketplace > Ajouter depuis un dépôt**. Écrivez `ragbase/ragbase-shield-mac` et cliquez sur **Synchro**. Dans l'onglet **Découvrir**, cliquez ensuite sur **Ajouter** à droite de « RAGbase Shield (Mac) », puis sur **Continuer**. Si votre Claude est en anglais : **Customize > Plugins > Add > Add marketplace > Add from a repository**, puis **Sync**, **Discover** et **Add**.
 
 ### Utiliser Shield en 3 étapes
 
@@ -62,8 +62,8 @@ Free and open source. Nothing else to install.
 
 You need the Claude app for Mac.
 
-- **Easiest:** on [shield.ragbase.ai](https://shield.ragbase.ai), click the button for Mac. The Claude app opens: click **Sync**, then **Add** next to "RAGbase Shield (Mac)".
-- **Other way:** in the Claude app, open **Customize > Plugins > Add > Add marketplace > Add from a repository**. Type `ragbase/ragbase-shield-mac` and click **Sync**. Then, in the **Discover** tab, click **Add** next to "RAGbase Shield (Mac)".
+- **Easiest:** on [shield.ragbase.ai](https://shield.ragbase.ai), click the button for Mac. The Claude app opens: click **Sync**, then **Add** next to "RAGbase Shield (Mac)", then **Continue** in the window that opens (Claude tells you that Shield is a program that runs on your computer: this is normal).
+- **Other way:** in the Claude app, open **Customize > Plugins > Add > Add marketplace > Add from a repository**. Type `ragbase/ragbase-shield-mac` and click **Sync**. Then, in the **Discover** tab, click **Add** next to "RAGbase Shield (Mac)", then **Continue**.
 
 ### Use Shield in 3 steps
 
@@ -94,7 +94,7 @@ Your client folders and the documents in "Shield - sorties" stay where they are.
 
 ## Technical details
 
-- **Engine source:** [github.com/ragbase/ragbase-shield](https://github.com/ragbase/ragbase-shield), branch `plugin-claude-tab`, commit `fcde0ac5f4fae092d4392b2651ac56bedab3cfc3`. The plugin runs the module `ragbase_shield.claude_tab` (RAGbase Shield 0.4.3): seven MCP tools in French, detection rules only (no model).
+- **Engine source:** [github.com/ragbase/ragbase-shield](https://github.com/ragbase/ragbase-shield), branch `plugin-claude-tab`, commit `e559045cf304794fa1bb4e68c92a6b9b5bfc70ed`. The plugin runs the module `ragbase_shield.claude_tab` (RAGbase Shield 0.4.4): seven MCP tools in French, detection rules only (no model).
 - **Start:** `.mcp.json` runs `/bin/sh ${CLAUDE_PLUGIN_ROOT}/engine/shield` (no execute bit needed). The script starts the bundled Python with an empty environment (`env -i`) and `-I -B`.
 - **Runtime:** Python 3.12.15, universal (Intel and Apple silicon), from python-build-standalone release 20261021 (PSF-2.0), in `engine/macos/`. The standard library is compiled (sourceless `.pyc` files) in `engine/macos/lib/python3.12/`. The interpreter file is `engine/macos/bin/RAGbase Shield` (Python under the product's name: macOS shows this name when it asks for access to a folder).
 - **No network:** nothing is downloaded at install or at run time, and the engine opens no network connection. The Mac build is tested with every network access denied by the system.

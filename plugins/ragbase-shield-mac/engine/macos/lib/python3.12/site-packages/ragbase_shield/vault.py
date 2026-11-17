@@ -83,6 +83,15 @@ _JOURNAL_WORDS = frozenset(KINDS) | frozenset(KIND_BY_EXT.values()) | {UNSUPPORT
 _SKIP_DIRS = {config.OUTPUT_DIR_NAME, "__MACOSX", "$RECYCLE.BIN", "System Volume Information"}
 # Files the operating system writes into folders: never listed, even as unsupported.
 _SYSTEM_FILES = frozenset({"thumbs.db", "desktop.ini", "ehthumbs.db", "icon\r"})
+#: v0.4.4 (F2): longest full path that Windows opens when long paths are off (MAX_PATH 260, with the final null).
+WINDOWS_MAX_PATH = 259
+
+
+def path_too_long(path: os.PathLike | str) -> bool:
+    """v0.4.4 (F2): True on Windows when ``path`` has more than :data:`WINDOWS_MAX_PATH` characters."""
+    from . import documents
+
+    return documents.windows_paths() and len(str(path)) > WINDOWS_MAX_PATH
 
 
 class VaultError(Exception):
@@ -566,6 +575,9 @@ class Dossier:
         self._local = 0
         self._ev_cache: tuple = (None, None)   # (erev, {key: counts}) (v0.3)
         self._dir_cache: tuple = (None, None)  # (drev, directory dict or None) (v0.3)
+        #: v0.4.4 (F2): documents or sub-folders of the last folder scan that could not be opened: {"long": paths
+        #: too long for Windows, "other": any other cause}. Counts only.
+        self.skipped: dict[str, int] = {"long": 0, "other": 0}
         try:
             self._db = _Db(db_path)
         except sqlite3.Error:
@@ -621,6 +633,24 @@ class Dossier:
 
     def _mac(self, text: str) -> bytes:
         return hmac.new(self._mac_key, text.encode("utf-8"), hashlib.sha256).digest()
+
+    # v0.4.4 (A): the kept set of the dossier (masked texts, kept between starts) uses the key and the cipher of
+    # this vault (Fernet with the dossier's data key): removing the dossier deletes the key, so a leftover kept file
+    # can no longer be decrypted.
+    def seal(self, data: bytes) -> bytes:
+        """Encrypt ``data`` with the dossier key (kept set)."""
+        return self._fernet.encrypt(bytes(data))
+
+    def unseal(self, token: bytes) -> bytes:
+        """Decrypt a kept-set file; VaultError when it does not decrypt (damaged, or another dossier's)."""
+        try:
+            return self._fernet.decrypt(bytes(token))
+        except (InvalidToken, ValueError, TypeError):
+            raise VaultError(f"{self.code}: déchiffrement impossible (decryption failed)") from None
+
+    def path_mac(self, rel: str) -> str:
+        """Keyed hash of a document path (kept-set manifest: never the name itself)."""
+        return self._mac("kept:" + rel).hex()
 
     @staticmethod
     def _rev_of(c: sqlite3.Connection) -> int:
@@ -1087,26 +1117,45 @@ class Dossier:
                       size=path.stat().st_size, rel=rel)
 
     def _scan_folder(self, include_unsupported: bool = False) -> dict[str, tuple[Path, int]]:
+        """{relative path: (path, size)} of the files of the folder. v0.4.4 (F2): a document or a sub-folder that
+        cannot be opened is counted in :attr:`skipped` ("long": its path is too long for Windows; "other": any other
+        cause), never named. A normal file and a normal folder take the same path through this code as before."""
         root = self.folder
         out: dict[str, tuple[Path, int]] = {}
+        skipped = {"long": 0, "other": 0}
+        self.skipped = skipped
         if not root.is_dir():
             return out
-        for dirpath, dirnames, filenames in os.walk(root, followlinks=False):
+
+        def count(path: Any) -> None:
+            skipped["long" if path_too_long(path) else "other"] += 1
+
+        def walk_error(err: OSError) -> None:  # a sub-folder os.walk cannot open
+            count(getattr(err, "filename", None) or "")
+
+        for dirpath, dirnames, filenames in os.walk(root, followlinks=False, onerror=walk_error):
             dirnames[:] = sorted(d for d in dirnames
                                  if not _hidden_name(d) and d not in _SKIP_DIRS and not _hidden_attr(Path(dirpath, d)))
             for name in sorted(filenames):
                 if _hidden_name(name) or name.casefold() in _SYSTEM_FILES:
                     continue
-                if Path(name).suffix.lower() not in SUPPORTED_EXTENSIONS and not include_unsupported:
+                supported = Path(name).suffix.lower() in SUPPORTED_EXTENSIONS
+                if not supported and not include_unsupported:
                     continue
                 path = Path(dirpath, name)
                 try:
                     if path.is_symlink() and not _inside(path.resolve(), root.resolve()):
                         continue
-                    if _hidden_attr(path) or not path.is_file():
+                    if _hidden_attr(path):
+                        continue
+                    if not path.is_file():
+                        if supported and not path.is_symlink() and not path.is_dir():
+                            count(path)  # listed by the folder, but the system does not open it
                         continue
                     size = path.stat().st_size
                 except OSError:
+                    if supported:
+                        count(path)
                     continue
                 rel = unicodedata.normalize("NFC", path.relative_to(root).as_posix())
                 out[rel] = (path, size)
